@@ -26,7 +26,7 @@ public class Orders {
     @OneToOne
     @JoinColumn(name = "Invoice_id")
     Invoice invoice;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "orderId")
     Set<OrderedItem> orderedItems;
 
     public Orders(long orderId, long customerId, Date date, int paymentStatus, Employees employee, double orderValue, double orderVat, Invoice invoice, Set<OrderedItem> orderedItems) {
