@@ -14,12 +14,25 @@ public class Invoice {
     int ksefStatus;
     @Column(name = "Sent_status")
     int sentStatus;
+    @JoinColumn(name = "Customer_id")
+    @ManyToOne
+    Customers customer;
 
-    public Invoice(long id, String invoiceJSON, int ksefStatus, int sentStatus) {
+
+    public Invoice(long id, String invoiceJSON, int ksefStatus, int sentStatus, Customers customer) {
         this.id = id;
         this.invoiceJSON = invoiceJSON;
         this.ksefStatus = ksefStatus;
         this.sentStatus = sentStatus;
+        this.customer = customer;
+    }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
     }
 
     public long getId() {

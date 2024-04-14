@@ -18,11 +18,11 @@ public class Items {
     double sellingPrice;
     @Column(name = "Selling_vat")
     double sellingVat;
-    @Column(name = "Supplier_id")
-    int supplierId;
     @Column(name = "Amount")
     int amount;
-
+    @JoinColumn(name = "Supplier_id")
+    @ManyToOne
+    Customers customer;
     public long getItem_id() {
         return item_id;
     }

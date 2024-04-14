@@ -1,12 +1,13 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Customers")
 public class Customers {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long customerId;
     @Column(name = "name")
     String customerName;
