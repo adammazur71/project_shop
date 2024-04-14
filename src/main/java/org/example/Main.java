@@ -1,7 +1,19 @@
 package org.example;
 
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Customers.class)
+                .addAnnotatedClass(Items.class)
+                .addAnnotatedClass(Invoice.class)
+                .addAnnotatedClass(Orders.class)
+                .addAnnotatedClass(Employees.class)
+                .addAnnotatedClass(OrderedItem.class)
+                .buildSessionFactory();
     }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Customer_id")
     long customerId;
     @Column(name = "name")
     String customerName;

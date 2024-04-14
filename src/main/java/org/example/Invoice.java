@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Invoice")
@@ -17,14 +18,25 @@ public class Invoice {
     @JoinColumn(name = "Customer_id")
     @ManyToOne
     Customers customer;
+    @OneToMany(mappedBy = "invoice")
+    Set<OrderedItem> orderedItems;
 
 
-    public Invoice(long id, String invoiceJSON, int ksefStatus, int sentStatus, Customers customer) {
+    public Invoice(long id, String invoiceJSON, int ksefStatus, int sentStatus, Customers customer, Set<OrderedItem> orderedItems) {
         this.id = id;
         this.invoiceJSON = invoiceJSON;
         this.ksefStatus = ksefStatus;
         this.sentStatus = sentStatus;
         this.customer = customer;
+        this.orderedItems = orderedItems;
+    }
+
+    public Set<OrderedItem> getOrderedItems() {
+        return orderedItems;
+    }
+
+    public void setOrderedItems(Set<OrderedItem> orderedItems) {
+        this.orderedItems = orderedItems;
     }
 
     public Customers getCustomer() {
