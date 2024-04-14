@@ -23,6 +23,26 @@ public class Items {
     @JoinColumn(name = "Supplier_id")
     @ManyToOne
     Customers customer;
+
+    public Items(long item_id, String name, double purchasePrice, double purchaseVat, double sellingPrice, double sellingVat, int amount, Customers customer) {
+        this.item_id = item_id;
+        this.name = name;
+        this.purchasePrice = purchasePrice;
+        this.purchaseVat = purchaseVat;
+        this.sellingPrice = sellingPrice;
+        this.sellingVat = sellingVat;
+        this.amount = amount;
+        this.customer = customer;
+    }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
+    }
+
     public long getItem_id() {
         return item_id;
     }
@@ -71,14 +91,6 @@ public class Items {
         this.sellingVat = sellingVat;
     }
 
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -87,14 +99,5 @@ public class Items {
         this.amount = amount;
     }
 
-    public Items(long item_id, String name, double purchasePrice, double purchaseVat, double sellingPrice, double sellingVat, int supplierId, int amount) {
-        this.item_id = item_id;
-        this.name = name;
-        this.purchasePrice = purchasePrice;
-        this.purchaseVat = purchaseVat;
-        this.sellingPrice = sellingPrice;
-        this.sellingVat = sellingVat;
-        this.supplierId = supplierId;
-        this.amount = amount;
-    }
+
 }
