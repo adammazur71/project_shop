@@ -15,12 +15,23 @@ public class OrderedItem {
     double soldPrice;
     @Column(name = "Sold_vat")
     double soldVat;
+    @Column(name = "qty")
+    int qty;
 
-    public OrderedItem(long orderId, long itemId, double soldPrice, double soldVat) {
+    public OrderedItem(long orderId, long itemId, double soldPrice, double soldVat, int qty) {
         this.orderId = orderId;
         this.itemId = itemId;
         this.soldPrice = soldPrice;
         this.soldVat = soldVat;
+        this.qty = qty;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public long getOrderId() {
