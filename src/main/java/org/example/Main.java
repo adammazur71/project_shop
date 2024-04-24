@@ -14,6 +14,7 @@ public class Main {
                 .addAnnotatedClass(InvoiceItems.class)
                 .addAnnotatedClass(Employees.class)
                 .addAnnotatedClass(Stock.class)
+                .addAnnotatedClass(Shipments.class)
                 .buildSessionFactory();
     }
 }

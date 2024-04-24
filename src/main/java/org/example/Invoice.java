@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    long invoiceId;
     @Column(name = "Invoice_json")
     String invoiceJSON;
     @OneToMany(mappedBy = "invoice")

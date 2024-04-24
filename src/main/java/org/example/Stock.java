@@ -15,6 +15,9 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long stockId;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    Items item;
     @Column(name = "qty")
     int qty;
 }
