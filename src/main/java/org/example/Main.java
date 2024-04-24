@@ -11,9 +11,9 @@ public class Main {
                 .addAnnotatedClass(Customers.class)
                 .addAnnotatedClass(Items.class)
                 .addAnnotatedClass(Invoice.class)
-                .addAnnotatedClass(Orders.class)
+                .addAnnotatedClass(InvoiceItems.class)
                 .addAnnotatedClass(Employees.class)
-                .addAnnotatedClass(OrderedItem.class)
+                .addAnnotatedClass(Stock.class)
                 .buildSessionFactory();
     }
 }

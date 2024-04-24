@@ -26,9 +26,7 @@ public class Invoice {
     @JoinColumn(name = "Customer_id")
     @ManyToOne
     Customers customer;
-    @OneToMany(mappedBy = "invoice")
-    Set<OrderedItem> orderedItems;
-
-
+    @OneToMany(mappedBy = "Invoice")
+    Set<InvoiceItems> invoiceItem;
 
 }
