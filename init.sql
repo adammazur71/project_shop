@@ -1,2 +1,3 @@
-CREATE DATABASE IF NOT EXISTS booking_system;
-USE booking_system;
+CREATE DATABASE IF NOT EXISTS shop;
+CREATE USER 'newuser' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'newuser';
