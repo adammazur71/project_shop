@@ -19,14 +19,14 @@ public class Invoice {
     long id;
     @Column(name = "Invoice_json")
     String invoiceJSON;
+    @OneToMany(mappedBy = "invoice")
+    Set<Shipments> shipments;
     @Column(name = "Ksef_status")
     int ksefStatus;
-    @Column(name = "Sent_status")
-    int sentStatus;
     @JoinColumn(name = "Customer_id")
     @ManyToOne
     Customers customer;
-    @OneToMany(mappedBy = "Invoice")
+    @OneToMany(mappedBy = "invoice")
     Set<InvoiceItems> invoiceItem;
 
 }
