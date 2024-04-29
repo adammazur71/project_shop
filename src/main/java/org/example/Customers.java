@@ -1,7 +1,7 @@
 package org.example;
 
-import javax.persistence.*;
-import java.util.Set;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "Customers")

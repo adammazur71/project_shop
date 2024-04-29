@@ -1,20 +1,12 @@
 package org.example;
 
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration()
-                .addAnnotatedClass(Customers.class)
-                .addAnnotatedClass(Items.class)
-                .addAnnotatedClass(Invoice.class)
-                .addAnnotatedClass(InvoiceItems.class)
-                .addAnnotatedClass(Employees.class)
-                .addAnnotatedClass(Stock.class)
-                .addAnnotatedClass(Shipments.class)
-                .buildSessionFactory();
+        SpringApplication.run(Main.class, args);
     }
 }
