@@ -13,7 +13,7 @@ services:
         - ./init.sql:/data/application/init.sql
     restart: always
     environment:
-      MYSQL_DB: booking_system
+      MYSQL_DB: shop
       MYSQL_ROOT_PASSWORD: example
       MYSQL_USER: newuser
       MYSQL_PASSWORD: password
