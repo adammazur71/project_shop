@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.persistence.*;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -16,6 +17,9 @@ public class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long itemId;
+    @JoinColumn(name = "item_type_id")
+    @ManyToOne
+    ItemType itemType;
     @Column(name = "Name")
     String name;
     @Column(name = "Purchase_price")

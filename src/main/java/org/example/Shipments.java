@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,14 +20,15 @@ public class Shipments {
     @ManyToOne
     @JoinColumn(name = "invoice_id")
     Invoice invoice;
+    @ManyToOne
+    @JoinColumn(name = "shipment_method_id")
+    ShipmentMethod shipmentMethod;
     @Column(name = "Shipment_date")
     Date shipmentDate;
-    @Column(name = "Employee_id")
-    long employeeId;
+    @JoinColumn(name = "Employee_id")
+    @ManyToOne
+    Employees employee;
     @Column(name = "Status")
     int status;
-    @Column(name = "Shipment_method")
-    long shipmentMethod;
-
 
 }
