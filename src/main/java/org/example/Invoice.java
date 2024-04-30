@@ -18,6 +18,8 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long invoiceId;
+    @Column(name = "Invoice_type", columnDefinition = "INT(1) NOT NULL CHECK(invoice_type BETWEEN 0  AND 1) COMMENT '0 - zakupowa, 1 - sprzedaży'")
+    int invoiceType;
     @Column(name = "Invoice_json")
     String invoiceJSON;
     @OneToMany(mappedBy = "invoice")
