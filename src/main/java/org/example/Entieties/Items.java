@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Entieties;
 
 import lombok.*;
 
@@ -27,8 +27,6 @@ public class Items {
     double sellingPrice;
     @Column(name = "Selling_vat")
     double sellingVat;
-    @Column(name = "Amount")
-    int amount;
     @JoinColumn(name = "Supplier_id")
     @ManyToOne
     Customers customer;
