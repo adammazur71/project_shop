@@ -1,19 +1,25 @@
 package org.example;
 
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.Exceptions.IdNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class ShopController {
-    @PostMapping("/items")
-    @ResponseBody
-    public Items postItem(@RequestBody Items items) {
-        return Items.builder()
-                .amount(items.getAmount())
-                .name(items.getName())
-                .build();
+
+private final ShopService shopService;
+
+    public ShopController(ShopService shopService) {
+        this.shopService = shopService;
     }
+
+    @GetMapping(value = "/product/{id}", produces = "application/json")
+    public ResponseEntity<Items> findById (@PathVariable Long id){
+        Items resultById = shopService.finById(id)
+                .orElseThrow(()->new IdNotFoundException("Id " + id + " is not found"));
+        return ResponseEntity.ok(resultById);
+    }
+
 }

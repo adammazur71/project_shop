@@ -1,8 +1,9 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor
 @Entity
 @Table(name = "Customers")
 public class Customers {

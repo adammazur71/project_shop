@@ -2,10 +2,11 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter

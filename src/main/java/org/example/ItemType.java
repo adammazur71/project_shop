@@ -1,7 +1,9 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "Item_type")
 public class ItemType {
