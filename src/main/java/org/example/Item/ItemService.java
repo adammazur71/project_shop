@@ -20,6 +20,7 @@ public class ItemService {
     }
 
     public Optional<List<Item>> findByItemName(String itemName){
+        itemName = "%"+itemName+"%";
         return itemRepository.findByItemName(itemName);
     }
 }
