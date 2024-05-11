@@ -28,12 +28,15 @@ public class ItemController {
 
     @GetMapping(value = "/product/search/{itemName}", produces = "application/json")
     public ResponseEntity<List<ItemDto>> findByItemName(@PathVariable String itemName) {
-        List<Item> itemlist = shopService.findByItemName(itemName)
-                .orElseThrow(()->new ItemNotFoundException("Item " + itemName + " is not found"));
-        List<ItemDto> result = itemlist.stream()
-                .map(itemMapper::toDto)
-                .toList();
-        return ResponseEntity.ok(result);
+        List<Item> itemlist = shopService.findByItemName(itemName);
+        if (itemlist.size() == 0) {
+            throw new ItemNotFoundException("Item " + itemName + " is not found");
+        } else {
+            List<ItemDto> result = itemlist.stream()
+                    .map(itemMapper::toDto)
+                    .toList();
+            return ResponseEntity.ok(result);
+        }
     }
 
 }

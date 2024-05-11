@@ -19,7 +19,7 @@ public class ItemService {
         return itemRepository.findById(id);
     }
 
-    public Optional<List<Item>> findByItemName(String itemName){
+    public List<Item> findByItemName(String itemName){
         itemName = "%"+itemName+"%";
         return itemRepository.findByItemName(itemName);
     }
