@@ -11,6 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    @Query("FROM Item WHERE itemName like(:itemName)")
+    @Query("FROM Item WHERE itemName like(%:itemName%)")
     Optional<List<Item>> findByItemName(@Param("itemName") String itemName);
 }

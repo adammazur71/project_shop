@@ -3,6 +3,7 @@ package org.example.Item;
 import org.example.Entieties.Item;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,5 +17,9 @@ public class ItemService {
 
     public Optional<Item> finById(Long id) {
         return itemRepository.findById(id);
+    }
+
+    public Optional<List<Item>> findByItemName(String itemName){
+        return itemRepository.findByItemName(itemName);
     }
 }

@@ -10,12 +10,12 @@ public class ItemType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long itemTypeId;
-    @Column(name = "Name")
-    String name;
+    @Column(name = "Item_Type_Name")
+    String itemTypeName;
 
     public ItemType(long itemTypeId, String name) {
         this.itemTypeId = itemTypeId;
-        this.name = name;
+        this.itemTypeName = name;
     }
 
     public long getItemTypeId() {
@@ -26,12 +26,12 @@ public class ItemType {
         this.itemTypeId = itemTypeId;
     }
 
-    public String getName() {
-        return name;
+    public String getItemTypeName() {
+        return itemTypeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemTypeName(String itemTypeName) {
+        this.itemTypeName = itemTypeName;
     }
 
 

@@ -17,8 +17,8 @@ public class Item {
     @JoinColumn(name = "item_type_id")
     @ManyToOne
     ItemType itemType;
-    @Column(name = "Name")
-    String name;
+    @Column(name = "Item_Name")
+    String itemName;
     @Column(name = "Purchase_price")
     double purchasePrice;
     @Column(name = "Purchase_vat")

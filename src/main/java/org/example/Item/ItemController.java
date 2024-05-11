@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.example.Dtos.ItemDto;
 import org.example.Entieties.Item;
 import org.example.Exceptions.IdNotFoundException;
+import org.example.Exceptions.ItemNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,9 +26,14 @@ public class ItemController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ItemDto>> findByItemName(String itemName){
-
+    @GetMapping(value = "/product/search/{itemName}", produces = "application/json")
+    public ResponseEntity<List<ItemDto>> findByItemName(@PathVariable String itemName) {
+        List<Item> itemlist = shopService.findByItemName(itemName)
+                .orElseThrow(()->new ItemNotFoundException("Item " + itemName + " is not found"));
+        List<ItemDto> result = itemlist.stream()
+                .map(itemMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(result);
     }
 
 }
