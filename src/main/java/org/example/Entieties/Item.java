@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 @Builder
 @Entity
 @Table(name = "Items")
-public class Items {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long itemId;

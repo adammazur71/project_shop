@@ -18,7 +18,7 @@ public class Stock {
     long stockId;
     @ManyToOne
     @JoinColumn(name = "item_id")
-    Items item;
+    Item item;
     @Column(name = "qty")
     int qty;
 }

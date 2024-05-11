@@ -17,7 +17,7 @@ public class InvoiceItems {
     long invoiceItemId;
     @ManyToOne
     @JoinColumn(name = "item_id")
-    Items item;
+    Item item;
     @ManyToOne
     @JoinColumn(name = "invoice_id")
     Invoice invoice;

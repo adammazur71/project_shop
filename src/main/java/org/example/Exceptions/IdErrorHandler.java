@@ -2,14 +2,14 @@ package org.example.Exceptions;
 
 import lombok.extern.log4j.Log4j2;
 import org.example.Dtos.IdNotFoundDto;
-import org.example.ShopController;
+import org.example.Item.ItemController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ControllerAdvice(assignableTypes = ShopController.class)
+@ControllerAdvice(assignableTypes = ItemController.class)
 @Log4j2
 public class IdErrorHandler {
     @ExceptionHandler(IdNotFoundException.class)
