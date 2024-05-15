@@ -27,7 +27,7 @@ public class CustomerController {
         Customer newCustomer = service.save(mapper.toEntity(customerDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
     }
-    @PatchMapping("/id")
+    @PatchMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody @Valid UpdateCustomerDto customerDto,
                                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

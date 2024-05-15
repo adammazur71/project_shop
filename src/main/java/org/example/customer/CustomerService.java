@@ -31,29 +31,6 @@ public class CustomerService {
         if (customerDto.role() != null) oldCustomer.setRole(customerDto.role());
         Customer updatedCustomer = builder.build();
         return repository.save(updatedCustomer);
-
-//        if (customerDto.customerName() == null) {
-//            builder.customerName(oldCustomer.getCustomerName());
-//        } else {
-//            builder.customerName(customerDto.customerName());
-//        }
-//        if (customerDto.nip()==null) {
-//            builder.nip(oldCustomer.getNip());
-//        }else{
-//            builder.nip(customerDto.nip());
-//        }
-//        if (customerDto.street()==null) {
-//            builder.street(oldCustomer.getStreet())
-//        } else {
-//            builder.street(customerDto.street())
-//        }
-//        if (customerDto.buildingNo()==null) {
-//            builder.buildingNo(oldCustomer.getBuildingNo());
-//        } else {
-//            builder.buildingNo(customerDto.buildingNo());
-//        }
-//        if (customerDto.apartmentNo()==null) {
-
     }
 
     public Customer getById(Long id) {
