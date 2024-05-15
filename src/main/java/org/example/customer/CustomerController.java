@@ -3,6 +3,7 @@ package org.example.customer;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.dtos.CustomerDto;
+import org.example.dtos.UpdateCustomerDto;
 import org.example.entieties.Customer;
 import org.example.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,15 @@ public class CustomerController {
         }
         Customer newCustomer = service.save(mapper.toEntity(customerDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
+    }
+    @PatchMapping("/id")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody @Valid UpdateCustomerDto customerDto,
+                                                   BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException(bindingResult);
+        }
+        Customer updatedCustomer = service.updateAndSaveCustomer(id, customerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedCustomer);
 
     }
 }

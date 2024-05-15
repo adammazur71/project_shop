@@ -1,6 +1,7 @@
 package org.example.customer;
 
 import lombok.AllArgsConstructor;
+import org.example.dtos.UpdateCustomerDto;
 import org.example.entieties.Customer;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,54 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CustomerService {
     CustomerRepository repository;
+
     public Customer save(Customer customer) {
         return repository.save(customer);
+    }
+
+    public Customer updateAndSaveCustomer(Long id, UpdateCustomerDto customerDto) {
+        Customer oldCustomer = getById(id);
+        Customer.CustomerBuilder builder = Customer.builder();
+        builder.customerId(id);
+        if (customerDto.customerName() != null) oldCustomer.setCustomerName(customerDto.customerName());
+        if (customerDto.nip() != null) oldCustomer.setNip(customerDto.nip());
+        if (customerDto.street() != null) oldCustomer.setStreet(customerDto.street());
+        if (customerDto.buildingNo() != null) oldCustomer.setBuildingNo(customerDto.buildingNo());
+        if (customerDto.apartmentNo() != null) oldCustomer.setApartmentNo(customerDto.apartmentNo());
+        if (customerDto.postal() != null) oldCustomer.setPostal(customerDto.postal());
+        if (customerDto.city() != null) oldCustomer.setCity(customerDto.city());
+        if (customerDto.country() != null) oldCustomer.setCountry(customerDto.country());
+        if (customerDto.phoneNo() != null) oldCustomer.setPhoneNo(customerDto.phoneNo());
+        if (customerDto.altPhoneNo() != null) oldCustomer.setAltPhoneNo(customerDto.altPhoneNo());
+        if (customerDto.role() != null) oldCustomer.setRole(customerDto.role());
+        Customer updatedCustomer = builder.build();
+        return repository.save(updatedCustomer);
+
+//        if (customerDto.customerName() == null) {
+//            builder.customerName(oldCustomer.getCustomerName());
+//        } else {
+//            builder.customerName(customerDto.customerName());
+//        }
+//        if (customerDto.nip()==null) {
+//            builder.nip(oldCustomer.getNip());
+//        }else{
+//            builder.nip(customerDto.nip());
+//        }
+//        if (customerDto.street()==null) {
+//            builder.street(oldCustomer.getStreet())
+//        } else {
+//            builder.street(customerDto.street())
+//        }
+//        if (customerDto.buildingNo()==null) {
+//            builder.buildingNo(oldCustomer.getBuildingNo());
+//        } else {
+//            builder.buildingNo(customerDto.buildingNo());
+//        }
+//        if (customerDto.apartmentNo()==null) {
+
+    }
+
+    public Customer getById(Long id) {
+        return repository.getReferenceById(id);
     }
 }
