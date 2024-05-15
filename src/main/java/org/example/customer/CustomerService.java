@@ -42,4 +42,9 @@ public class CustomerService {
         customerName = "%" + customerName + "%";
         return repository.findCustomerByName(customerName);
     }
+
+    public List<Customer> findCustomerByNip(String customerNip) {
+        customerNip = "%" + customerNip + "%";
+        return repository.findCustomerByNip(customerNip);
+    }
 }

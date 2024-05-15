@@ -13,4 +13,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = "SELECT * FROM customers WHERE customer_name like(:customerName)", nativeQuery = true)
     List<Customer> findCustomerByName(@Param("customerName") String customerName);
+
+
+
+    @Query(value = "SELECT * FROM customers WHERE nip like(:customerNip)", nativeQuery = true)
+    List<Customer> findCustomerByNip(@Param("customerNip") String customerName);
 }

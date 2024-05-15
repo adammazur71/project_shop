@@ -48,11 +48,24 @@ public class CustomerController {
         return ResponseEntity.ok(customerbyId);
     }
 
-    @GetMapping(value = "/search/{customerName}", produces = "application/json")
+    @GetMapping(value = "/search/name/{customerName}", produces = "application/json")
     public ResponseEntity<List<CustomerDto>> findCustomerByName(@PathVariable String customerName) {
         List<Customer> customerlist = service.findCustomerByName(customerName);
         if (customerlist.size() == 0) {
             throw new NotFoundException("Customer name containing: " + customerName + " is not found");
+        } else {
+            List<CustomerDto> result = customerlist.stream()
+                    .map(CustomerMapper::toDto)
+                    .toList();
+            return ResponseEntity.ok(result);
+        }
+    }
+
+    @GetMapping(value = "/search/nip/{customerNip}", produces = "application/json")
+    public ResponseEntity<List<CustomerDto>> findCustomerByNip(@PathVariable String customerNip) {
+        List<Customer> customerlist = service.findCustomerByNip(customerNip);
+        if (customerlist.size() == 0) {
+            throw new NotFoundException("Customer nip containing: " + customerNip + " is not found");
         } else {
             List<CustomerDto> result = customerlist.stream()
                     .map(CustomerMapper::toDto)
