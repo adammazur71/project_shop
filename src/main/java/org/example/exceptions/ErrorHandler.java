@@ -21,10 +21,10 @@ public class ErrorHandler {
         return new ErrorDto(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ItemNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDto handleItemNotFoundException(ItemNotFoundException exception) {
+    public ErrorDto handleItemNotFoundException(NotFoundException exception) {
         log.info(exception.getMessage() + ", STATUS: " + HttpStatus.NOT_FOUND);
         return new ErrorDto(exception.getMessage(), HttpStatus.NOT_FOUND);
     }

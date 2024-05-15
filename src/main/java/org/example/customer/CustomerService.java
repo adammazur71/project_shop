@@ -3,7 +3,11 @@ package org.example.customer;
 import lombok.AllArgsConstructor;
 import org.example.dtos.UpdateCustomerDto;
 import org.example.entieties.Customer;
+import org.example.exceptions.IdNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,7 +19,7 @@ public class CustomerService {
     }
 
     public Customer updateAndSaveCustomer(Long id, UpdateCustomerDto customerDto) {
-        Customer oldCustomer = getById(id);
+        Customer oldCustomer = getById(id).orElseThrow(() -> new IdNotFoundException("Id " + id + " does not exist"));
         Customer.CustomerBuilder builder = Customer.builder();
         builder.customerId(id);
         if (customerDto.customerName() != null) oldCustomer.setCustomerName(customerDto.customerName());
@@ -33,7 +37,12 @@ public class CustomerService {
         return repository.save(updatedCustomer);
     }
 
-    public Customer getById(Long id) {
-        return repository.getReferenceById(id);
+    public Optional<Customer> getById(Long id) {
+        return repository.findById(id);
+    }
+
+    public List<Customer> findCustomerByName(String customerName) {
+        customerName = "%" + customerName + "%";
+        return repository.findCustomerByName(customerName);
     }
 }

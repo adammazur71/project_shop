@@ -11,4 +11,10 @@ public class CustomerMapper {
                 customerDto.apartmentNo(), customerDto.postal(), customerDto.city(), customerDto.country(), customerDto.phoneNo(),
                 customerDto.altPhoneNo(), customerDto.role());
     }
+
+    public static CustomerDto toDto(Customer customer) {
+        return new CustomerDto(customer.getCustomerId(), customer.getCustomerName(), customer.getNip(),
+                customer.getStreet(), customer.getBuildingNo(), customer.getApartmentNo(), customer.getPostal(),
+                customer.getCity(), customer.getCountry(), customer.getPhoneNo(), customer.getAltPhoneNo(), customer.getRole());
+    }
 }

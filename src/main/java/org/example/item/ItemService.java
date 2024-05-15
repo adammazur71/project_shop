@@ -19,8 +19,8 @@ public class ItemService {
         return itemRepository.findById(id);
     }
 
-    public List<Item> findByItemName(String itemName){
+    public List<Item> findItemByName(String itemName){
         itemName = "%"+itemName+"%";
-        return itemRepository.findByItemName(itemName);
+        return itemRepository.findItemByName(itemName);
     }
 }
