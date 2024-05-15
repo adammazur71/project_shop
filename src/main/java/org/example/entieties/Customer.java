@@ -29,9 +29,8 @@ public class Customer {
     int phoneNo;
     @Column(name = "Alt_phone_no")
     int altPhoneNo;
-    @Column(name = "Role")
+    @Column(name = "Role", columnDefinition = "INT(1) NOT NULL CHECK(role BETWEEN 0  AND 2) COMMENT 'funkcja: 0 - klient, 1 - dostawca, 2 - oba'")
     int role;
-
     public long getCustomerId() {
         return customerId;
     }
