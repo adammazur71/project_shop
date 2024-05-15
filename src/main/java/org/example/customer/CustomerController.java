@@ -52,7 +52,7 @@ public class CustomerController {
     public ResponseEntity<List<CustomerDto>> findCustomerByName(@PathVariable String customerName) {
         List<Customer> customerlist = service.findCustomerByName(customerName);
         if (customerlist.size() == 0) {
-            throw new NotFoundException("Item " + customerName + " is not found");
+            throw new NotFoundException("Customer name containing: " + customerName + " is not found");
         } else {
             List<CustomerDto> result = customerlist.stream()
                     .map(CustomerMapper::toDto)

@@ -15,10 +15,10 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Customer_id")
     Long customerId;
-    @Column(name = "Name")
+    @Column(name = "customer_name")
     String customerName;
     @Column(name = "Nip")
-    Long nip;
+    String nip;
     @Column(name = "Street")
     String street;
     @Column(name = "Building_no")

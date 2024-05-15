@@ -20,8 +20,6 @@ public class CustomerService {
 
     public Customer updateAndSaveCustomer(Long id, UpdateCustomerDto customerDto) {
         Customer oldCustomer = getById(id).orElseThrow(() -> new IdNotFoundException("Id " + id + " does not exist"));
-        Customer.CustomerBuilder builder = Customer.builder();
-        builder.customerId(id);
         if (customerDto.customerName() != null) oldCustomer.setCustomerName(customerDto.customerName());
         if (customerDto.nip() != null) oldCustomer.setNip(customerDto.nip());
         if (customerDto.street() != null) oldCustomer.setStreet(customerDto.street());
@@ -33,8 +31,7 @@ public class CustomerService {
         if (customerDto.phoneNo() != null) oldCustomer.setPhoneNo(customerDto.phoneNo());
         if (customerDto.altPhoneNo() != null) oldCustomer.setAltPhoneNo(customerDto.altPhoneNo());
         if (customerDto.role() != null) oldCustomer.setRole(customerDto.role());
-        Customer updatedCustomer = builder.build();
-        return repository.save(updatedCustomer);
+        return repository.save(oldCustomer);
     }
 
     public Optional<Customer> getById(Long id) {
