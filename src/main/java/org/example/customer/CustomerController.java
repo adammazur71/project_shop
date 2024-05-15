@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.example.dtos.CustomerDto;
 import org.example.dtos.UpdateCustomerDto;
 import org.example.entieties.Customer;
-import org.example.exceptions.IdNotFoundException;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
@@ -44,7 +43,7 @@ public class CustomerController {
 
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Customer> getById(@PathVariable Long id) {
-        Customer customerbyId = service.getById(id).orElseThrow(() -> new IdNotFoundException("Id " + id + " does not exist"));
+        Customer customerbyId = service.getById(id).orElseThrow(() -> new NotFoundException("Id " + id + " does not exist"));
         return ResponseEntity.ok(customerbyId);
     }
 

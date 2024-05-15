@@ -13,18 +13,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice(assignableTypes = {ItemController.class, CustomerController.class})
 @Log4j2
 public class ErrorHandler {
-    @ExceptionHandler(IdNotFoundException.class)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDto handleIdNotFoundException(IdNotFoundException exception) {
-        log.info(exception.getMessage() + ", STATUS: " + HttpStatus.NOT_FOUND);
-        return new ErrorDto(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(NotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDto handleItemNotFoundException(NotFoundException exception) {
+    public ErrorDto handleNotFoundException(NotFoundException exception) {
         log.info(exception.getMessage() + ", STATUS: " + HttpStatus.NOT_FOUND);
         return new ErrorDto(exception.getMessage(), HttpStatus.NOT_FOUND);
     }

@@ -4,7 +4,6 @@ package org.example.item;
 import lombok.AllArgsConstructor;
 import org.example.dtos.ItemDto;
 import org.example.entieties.Item;
-import org.example.exceptions.IdNotFoundException;
 import org.example.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class ItemController {
     @GetMapping(value = "/product/{id}", produces = "application/json")
     public ResponseEntity<ItemDto> findItemById(@PathVariable Long id) {
         Item resultById = service.finById(id)
-                .orElseThrow(() -> new IdNotFoundException("Id " + id + " is not found"));
+                .orElseThrow(() -> new NotFoundException("Id " + id + " is not found"));
         ItemDto result = mapper.toDto(resultById);
         return ResponseEntity.ok(result);
     }
