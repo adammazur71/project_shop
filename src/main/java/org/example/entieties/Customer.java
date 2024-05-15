@@ -1,4 +1,4 @@
-package org.example.Entieties;
+package org.example.entieties;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "Customers")
-public class Customers {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Customer_id")
@@ -18,7 +18,7 @@ public class Customers {
     @Column(name = "Building_no")
     String buildingNo;
     @Column(name = "Apartment_no")
-    String aparmentNo;
+    String apartmentNo;
     @Column(name = "Postal")
     int postal;
     @Column(name = "City")
@@ -64,12 +64,12 @@ public class Customers {
         this.buildingNo = buildingNo;
     }
 
-    public String getAparmentNo() {
-        return aparmentNo;
+    public String getApartmentNo() {
+        return apartmentNo;
     }
 
-    public void setAparmentNo(String aparmentNo) {
-        this.aparmentNo = aparmentNo;
+    public void setApartmentNo(String apartmentNo) {
+        this.apartmentNo = apartmentNo;
     }
 
     public int getPostal() {
@@ -120,12 +120,12 @@ public class Customers {
         this.role = role;
     }
 
-    public Customers(long customerId, String customerName, String street, String buildingNo, String aparmentNo, int postal, String city, String country, int phoneNo, int altPhoneNo, int role) {
+    public Customer(long customerId, String customerName, String street, String buildingNo, String apartmentNo, int postal, String city, String country, int phoneNo, int altPhoneNo, int role) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.street = street;
         this.buildingNo = buildingNo;
-        this.aparmentNo = aparmentNo;
+        this.apartmentNo = apartmentNo;
         this.postal = postal;
         this.city = city;
         this.country = country;

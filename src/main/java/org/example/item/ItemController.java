@@ -1,11 +1,11 @@
-package org.example.Item;
+package org.example.item;
 
 
 import lombok.AllArgsConstructor;
-import org.example.Dtos.ItemDto;
-import org.example.Entieties.Item;
-import org.example.Exceptions.IdNotFoundException;
-import org.example.Exceptions.ItemNotFoundException;
+import org.example.dtos.ItemDto;
+import org.example.entieties.Item;
+import org.example.exceptions.IdNotFoundException;
+import org.example.exceptions.ItemNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

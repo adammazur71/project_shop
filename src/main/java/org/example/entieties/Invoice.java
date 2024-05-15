@@ -1,4 +1,4 @@
-package org.example.Entieties;
+package org.example.entieties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Invoice {
     int ksefStatus;
     @JoinColumn(name = "Customer_id")
     @ManyToOne
-    Customers customer;
+    Customer customer;
     @OneToMany(mappedBy = "invoice")
     Set<InvoiceItems> invoiceItem;
 

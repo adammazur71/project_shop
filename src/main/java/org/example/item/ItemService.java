@@ -1,6 +1,6 @@
-package org.example.Item;
+package org.example.item;
 
-import org.example.Entieties.Item;
+import org.example.entieties.Item;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

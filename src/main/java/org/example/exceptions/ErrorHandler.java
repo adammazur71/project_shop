@@ -1,9 +1,9 @@
-package org.example.Exceptions;
+package org.example.exceptions;
 
 import lombok.extern.log4j.Log4j2;
-import org.example.Dtos.IdNotFoundDto;
-import org.example.Dtos.ItemNotFoundDto;
-import org.example.Item.ItemController;
+import org.example.dtos.IdNotFoundDto;
+import org.example.dtos.ItemNotFoundDto;
+import org.example.item.ItemController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

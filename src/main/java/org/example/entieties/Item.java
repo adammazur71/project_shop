@@ -1,4 +1,4 @@
-package org.example.Entieties;
+package org.example.entieties;
 
 import lombok.*;
 
@@ -29,6 +29,6 @@ public class Item {
     double sellingVat;
     @JoinColumn(name = "Supplier_id")
     @ManyToOne
-    Customers customer;
+    Customer customer;
 
 }
