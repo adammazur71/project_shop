@@ -19,7 +19,7 @@ public class InvoiceController {
     InvoiceMapper mapper;
 
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<Invoice> importInvoice(@RequestBody InvoiceDto invoice, BindingResult bindingResult) {
+    public ResponseEntity<Invoice> consumeInvoice(@RequestBody InvoiceDto invoice, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) throw new ValidationException(bindingResult);
         Invoice importedInvoice = service.importInvoice(mapper.toEntity(invoice));
         return ResponseEntity.ok(importedInvoice);

@@ -2,7 +2,6 @@ package org.example.invoice;
 
 import org.example.entieties.Invoice;
 import org.example.entieties.InvoiceItem;
-import org.example.exceptions.ValidationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -19,17 +18,17 @@ public class InvoiceService {
     }
 
     public Invoice importInvoice(Invoice invoice) {
-        if (invoice.getInvoiceType() != PURCHASE_INVOICE) throw new ValidationException("It's not purchase invoice");
         invoice.setNetAmount(calculateNetAmount(invoice));
         invoice.setGrossAmount(calculateGrossAmount(invoice));
-        return repository.importInvoice(invoice);
+        if (invoice.getInvoiceType() == PURCHASE_INVOICE) return repository.importInvoice(invoice);
+        return repository.exportInvoice(invoice);
     }
 
     private Double calculateNetAmount(Invoice invoice) {
         Set<InvoiceItem> items = invoice.getInvoiceItem();
         Double calculatedNetAmount = 0.0;
         for (InvoiceItem i : items) {
-            calculatedNetAmount = calculatedNetAmount + i.getNetValue()*i.getQtySold();
+            calculatedNetAmount = calculatedNetAmount + i.getNetValue() * i.getQtySold();
         }
         return calculatedNetAmount;
     }
@@ -38,7 +37,7 @@ public class InvoiceService {
         Set<InvoiceItem> items = invoice.getInvoiceItem();
         Double calculatedGrossAmount = 0.0;
         for (InvoiceItem i : items) {
-            calculatedGrossAmount = calculatedGrossAmount + i.getGrossValue()*i.getQtySold();
+            calculatedGrossAmount = calculatedGrossAmount + i.getGrossValue() * i.getQtySold();
         }
         return calculatedGrossAmount;
     }
