@@ -29,7 +29,7 @@ public class CustomerService {
         if (customerDto.city() != null) oldCustomer.setCity(customerDto.city());
         if (customerDto.country() != null) oldCustomer.setCountry(customerDto.country());
         if (customerDto.phoneNo() != null) oldCustomer.setPhoneNo(customerDto.phoneNo());
-        if (customerDto.altPhoneNo() != null) oldCustomer.setAltPhoneNo(customerDto.altPhoneNo());
+        if (customerDto.email() != null) oldCustomer.setEmail(customerDto.email());
         if (customerDto.role() != null) oldCustomer.setRole(customerDto.role());
         return repository.save(oldCustomer);
     }

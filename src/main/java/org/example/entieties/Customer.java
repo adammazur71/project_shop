@@ -32,8 +32,8 @@ public class Customer {
     String country;
     @Column(name = "Phone_no")
     String phoneNo;
-    @Column(name = "Alt_phone_no")
-    String altPhoneNo;
+    @Column(name = "e-mail")
+    String email;
     @Column(name = "Role", columnDefinition = "INT(1) NOT NULL CHECK(role BETWEEN 0  AND 2) COMMENT 'funkcja: 0 - klient, 1 - dostawca, 2 - oba'")
     Integer role;
 
