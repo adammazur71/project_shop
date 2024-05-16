@@ -20,8 +20,9 @@ public class InvoiceService {
     public Invoice importInvoice(Invoice invoice) {
         invoice.setNetAmount(calculateNetAmount(invoice));
         invoice.setGrossAmount(calculateGrossAmount(invoice));
-        if (invoice.getInvoiceType() == PURCHASE_INVOICE) return repository.importInvoice(invoice);
-        return repository.exportInvoice(invoice);
+        return repository.importInvoice(invoice);
+//        if (invoice.getInvoiceType() == PURCHASE_INVOICE) return repository.importInvoice(invoice);
+//        return repository.exportInvoice(invoice);
     }
 
     private Double calculateNetAmount(Invoice invoice) {
