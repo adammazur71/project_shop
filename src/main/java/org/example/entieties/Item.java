@@ -36,6 +36,9 @@ public class Item {
     @OneToMany
     @JoinColumn(name = "item_id")
     Set<InvoiceItem> invoiceItems;
+    @OneToOne
+    @JoinColumn(name ="item_id")
+    Stock stock;
 
 
 }
