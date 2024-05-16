@@ -11,22 +11,20 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "Invoice_items")
-public class InvoiceItems {
+public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long invoiceItemId;
-    @ManyToOne
-    @JoinColumn(name = "item_id")
-    Item item;
-    @ManyToOne
-    @JoinColumn(name = "invoice_id")
-    Invoice invoice;
+    Long invoiceItemId;
+    @Column(name = "item_id")
+    Long itemId;
+    @Column(name = "invoice_id")
+    Long invoiceId;
     @Column(name = "qty_sold")
-    int qtySold;
+    Integer qtySold;
     @Column(name = "net_value")
-    double netValue;
+    Double netValue;
     @Column(name = "gross_value")
-    double grossValue;
+    Double grossValue;
 
 
 

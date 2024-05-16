@@ -15,10 +15,10 @@ import jakarta.persistence.*;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long stockId;
+    Long stockId;
     @ManyToOne
     @JoinColumn(name = "item_id")
     Item item;
     @Column(name = "qty")
-    int qty;
+    Integer qty;
 }

@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 public class ValidationException extends RuntimeException {
 
+    public ValidationException(String message){
+        super(message);
+    }
+
     public ValidationException(BindingResult bindingResult) {
         super(asMessage(bindingResult));
 

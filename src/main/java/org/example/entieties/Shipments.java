@@ -17,7 +17,7 @@ import java.util.Date;
 public class Shipments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long shipmentId;
+    Long shipmentId;
     @ManyToOne
     @JoinColumn(name = "invoice_id")
     Invoice invoice;
@@ -30,6 +30,6 @@ public class Shipments {
     @ManyToOne
     Employees employee;
     @Column(name = "Status")
-    int status;
+    Integer status;
 
 }

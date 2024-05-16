@@ -1,36 +1,22 @@
 package org.example.entieties;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "Employees")
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long employeeId;
+    Long employeeId;
     @Column(name = "Name")
-    String name;
+    String employeeName;
 
-    public Employees(long employeeId, String name) {
-        this.employeeId = employeeId;
-        this.name = name;
-    }
-
-    public long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

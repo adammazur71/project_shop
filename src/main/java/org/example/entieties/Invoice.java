@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 @NoArgsConstructor
@@ -13,23 +14,26 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "Invoice")
+@Table(name = "invoice")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long invoiceId;
-    @Column(name = "Invoice_type", columnDefinition = "INT(1) NOT NULL CHECK(invoice_type BETWEEN 0  AND 1) COMMENT '0 - zakupowa, 1 - sprzedaży'")
-    int invoiceType;
-    @Column(name = "Invoice_json")
-    String invoiceJSON;
+    Long invoiceId;
+    @Column(name = "invoice_type", columnDefinition = "INT(1) NOT NULL CHECK(invoice_type BETWEEN 0  AND 1) COMMENT '0 - zakupowa, 1 - sprzedaży'")
+    Integer invoiceType;
     @OneToMany(mappedBy = "invoice")
     Set<Shipments> shipments;
-    @Column(name = "Ksef_status")
-    int ksefStatus;
-    @JoinColumn(name = "Customer_id")
+    @Column(name = "ksef_status")
+    Integer ksefStatus;
+    @Column(name = "net_amount")
+    Double netAmount;
+    @Column(name = "gross_amount")
+    Double grossAmount;
+    @JoinColumn(name = "customer_id")
     @ManyToOne
     Customer customer;
-    @OneToMany(mappedBy = "invoice")
-    Set<InvoiceItems> invoiceItem;
+    @OneToMany
+    @JoinColumn(name = "invoice_id")
+    Set<InvoiceItem> invoiceItem;
 
 }
