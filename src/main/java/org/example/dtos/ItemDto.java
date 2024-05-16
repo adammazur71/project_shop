@@ -1,5 +1,8 @@
 package org.example.dtos;
 
-public record ItemDto(long itemId, long itemTypeId, String name, double purchasePrice, double purchaseVat,
-                      double sellingPrise, double sellingVat, long supplierId ) {
+import org.example.entieties.Customer;
+import org.example.entieties.ItemType;
+
+public record ItemDto(Long itemId, ItemType itemType, String itemName, Double purchaseNetPrice, Double purchaseGrossPrice,
+                      Double sellingNetPrice, Double sellingGrossPrice, Customer customer) {
 }

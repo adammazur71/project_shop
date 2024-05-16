@@ -12,12 +12,13 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/product/")
 public class ItemController {
 
     private final ItemService service;
     private final ItemMapper mapper;
 
-    @GetMapping(value = "/product/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<ItemDto> findItemById(@PathVariable Long id) {
         Item resultById = service.finById(id)
                 .orElseThrow(() -> new NotFoundException("Id " + id + " is not found"));
@@ -25,7 +26,7 @@ public class ItemController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping(value = "/product/search/{itemName}", produces = "application/json")
+    @GetMapping(value = "/search/{itemName}", produces = "application/json")
     public ResponseEntity<List<ItemDto>> findItemByName(@PathVariable String itemName) {
         List<Item> itemlist = service.findItemByName(itemName);
         if (itemlist.size() == 0) {
@@ -36,6 +37,11 @@ public class ItemController {
                     .toList();
             return ResponseEntity.ok(result);
         }
+    }
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Item> makeNewItem(@RequestBody ItemDto itemDto) {
+        Item savedItem = service.saveNewItem(mapper.toEntity(itemDto));
+        return ResponseEntity.ok(savedItem);
     }
 
 }
