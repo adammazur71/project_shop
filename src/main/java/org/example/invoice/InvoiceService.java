@@ -10,8 +10,8 @@ import java.util.Set;
 public class InvoiceService {
     InvoiceRepository repository;
 
-    private static final int PURCHASE_INVOICE = 0;
-    private static final int SALES_INVOICE = 1;
+    public static final int PURCHASE_INVOICE = 0;
+    public static final int SALES_INVOICE = 1;
 
     public InvoiceService(InvoiceRepository repository) {
         this.repository = repository;
@@ -21,9 +21,8 @@ public class InvoiceService {
         invoice.setNetAmount(calculateNetAmount(invoice));
         invoice.setGrossAmount(calculateGrossAmount(invoice));
         return repository.importInvoice(invoice);
-//        if (invoice.getInvoiceType() == PURCHASE_INVOICE) return repository.importInvoice(invoice);
-//        return repository.exportInvoice(invoice);
     }
+
 
     private Double calculateNetAmount(Invoice invoice) {
         Set<InvoiceItem> items = invoice.getInvoiceItem();

@@ -22,17 +22,8 @@ public class InvoiceRepository {
         Invoice savedInvoice = entityManager.merge(invoice);
         Set<InvoiceItem> invoiceItems = invoice.getInvoiceItem();
         for (InvoiceItem invoiceItem : invoiceItems) {
-//            invoiceItem.setInvoiceId(savedInvoice.getInvoiceId());
-//            InvoiceItem savedInvoiceItem = entityManager.merge(invoiceItem);
-//            invoiceItem.setInvoiceItemId(savedInvoiceItem.getInvoiceItemId());
             saveInvoiceItemAndSetInvoiceItemId(invoiceItem, savedInvoice);
-//            Stock stock = getStockByItemId(invoiceItem.getItemId());
-//            stock.setQty(stock.getQty() + invoiceItem.getQtySold());
-//            entityManager.persist(stock);
             saveStock(invoiceItem, invoice);
-//            Item item = entityManager.find(Item.class, invoiceItem.getItemId());
-//            item.setPurchaseNetPrice(invoiceItem.getNetValue());
-//            item.setPurchaseGrossPrice(invoiceItem.getGrossValue());
             Item item = changeStockQty(invoiceItem);
             entityManager.persist(item);
         }
@@ -48,7 +39,7 @@ public class InvoiceRepository {
 
     private void saveStock(InvoiceItem invoiceItem, Invoice invoice) {
         Stock stock = getStockByItemId(invoiceItem.getItemId());
-        if (invoice.getInvoiceType() == 0) stock.setQty(stock.getQty() + invoiceItem.getQtySold());
+        if (invoice.getInvoiceType() == InvoiceService.PURCHASE_INVOICE) stock.setQty(stock.getQty() + invoiceItem.getQtySold());
         else {
             stock.setQty(stock.getQty() - invoiceItem.getQtySold());
             if (stock.getQty() < 0)
@@ -70,25 +61,4 @@ public class InvoiceRepository {
                 .getSingleResult();
     }
 
-//    @Transactional
-//    public Invoice exportInvoice(Invoice invoice) {
-//        Invoice savedInvoice = entityManager.merge(invoice);
-//        Set<InvoiceItem> invoiceItems = invoice.getInvoiceItem();
-//        for (InvoiceItem invoiceItem : invoiceItems) {
-//            invoiceItem.setInvoiceId(savedInvoice.getInvoiceId());
-//            InvoiceItem savedInvoiceItem = entityManager.merge(invoiceItem);
-//            invoiceItem.setInvoiceItemId(savedInvoiceItem.getInvoiceItemId());
-//            Stock stock = getStockByItemId(invoiceItem.getItemId());
-//            stock.setQty(stock.getQty() - invoiceItem.getQtySold());
-//            if (stock.getQty() < 0)
-//                throw new ValidationException("There's not enough product id: " + invoiceItem.getItemId() + " on stock");
-//            entityManager.persist(stock);
-//            Item item = entityManager.find(Item.class, invoiceItem.getItemId());
-//            item.setSellingNetPrice(invoiceItem.getNetValue());
-//            item.setSellingGrossPrice(invoiceItem.getGrossValue());
-//            entityManager.persist(item);
-//        }
-//        savedInvoice.setInvoiceItem(invoiceItems);
-//        return savedInvoice;
-//    }
 }

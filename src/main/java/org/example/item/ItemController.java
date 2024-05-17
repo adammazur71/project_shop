@@ -3,7 +3,9 @@ package org.example.item;
 
 import lombok.AllArgsConstructor;
 import org.example.dtos.ItemDto;
+import org.example.dtos.ItemTypeDto;
 import org.example.entieties.Item;
+import org.example.entieties.ItemType;
 import org.example.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ public class ItemController {
 
     private final ItemService service;
     private final ItemMapper mapper;
+    private final ItemTypeMapper itemTypeMapper;
 
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<ItemDto> findItemById(@PathVariable Long id) {
@@ -38,10 +41,17 @@ public class ItemController {
             return ResponseEntity.ok(result);
         }
     }
+
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Item> makeNewItem(@RequestBody ItemDto itemDto) {
         Item savedItem = service.saveNewItem(mapper.toEntity(itemDto));
         return ResponseEntity.ok(savedItem);
+    }
+
+    @PostMapping(value = "/type", produces = "application/json")
+    public ResponseEntity<ItemType> makeNewItemType(@RequestBody ItemTypeDto itemTypeDto) {
+        ItemType newItemType = service.makeNewItemType(itemTypeMapper.toEntity(itemTypeDto));
+        return ResponseEntity.ok(newItemType);
     }
 
 }
