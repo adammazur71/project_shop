@@ -4,25 +4,31 @@ import org.example.client.KsefProxy;
 import org.example.dtos.KsefInvoiceDto;
 import org.example.entieties.Invoice;
 import org.example.entieties.InvoiceItem;
+import org.example.events.SentToKsefEvent;
+import org.example.exceptions.ValidationException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class InvoiceService {
-    InvoiceRepository repository;
-    KsefProxy proxy;
-    KsefMapper ksefMapper;
+    private final InvoiceRepository repository;
+    private final KsefProxy proxy;
+    private final KsefMapper ksefMapper;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public static final int PURCHASE_INVOICE = 0;
     public static final int SALES_INVOICE = 1;
 
-    public InvoiceService(InvoiceRepository repository, KsefProxy proxy, KsefMapper ksefMapper) {
+    public InvoiceService(InvoiceRepository repository, KsefProxy proxy, KsefMapper ksefMapper, ApplicationEventPublisher applicationEventPublisher) {
         this.repository = repository;
         this.proxy = proxy;
         this.ksefMapper = ksefMapper;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     public Invoice importInvoice(Invoice invoice) {
@@ -53,10 +59,18 @@ public class InvoiceService {
     @Transactional
     public KsefInvoiceDto sendInvoiceToKsef(Long invoiceId) throws ExecutionException, InterruptedException {
         Invoice invoiceToSend = getInvoiceById(invoiceId);
+        validateInvoiceBeforeSend(invoiceToSend);
         KsefInvoiceDto answerFromKsef = proxy.sendInvoiceToKsef(ksefMapper.toKsefInvoiceDto(invoiceToSend));
         setKsefId(invoiceToSend, answerFromKsef);
         repository.updateInvoice(invoiceToSend);
+        SentToKsefEvent sentToKsefEvent = new SentToKsefEvent(answerFromKsef, Clock.systemUTC());
+        applicationEventPublisher.publishEvent(sentToKsefEvent);
         return answerFromKsef;
+    }
+
+    private void validateInvoiceBeforeSend(Invoice invoice){
+        if (invoice.getKsefId()!=null)
+            throw new ValidationException("Invoice " + invoice.getInvoiceNo() + " has been already sent");
     }
 
     private Invoice setKsefId(Invoice invoice, KsefInvoiceDto answerFromKsef) {
