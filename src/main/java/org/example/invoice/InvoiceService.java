@@ -68,14 +68,15 @@ public class InvoiceService {
         return answerFromKsef;
     }
 
-    private void validateInvoiceBeforeSend(Invoice invoice){
-        if (invoice.getKsefId()!=null)
+    private void validateInvoiceBeforeSend(Invoice invoice) {
+        if (invoice.getKsefId() != null)
             throw new ValidationException("Invoice " + invoice.getInvoiceNo() + " has been already sent");
+        if (invoice.getInvoiceType() != SALES_INVOICE)
+            throw new ValidationException("It's not selling invoice");
     }
 
-    private Invoice setKsefId(Invoice invoice, KsefInvoiceDto answerFromKsef) {
+    private void setKsefId(Invoice invoice, KsefInvoiceDto answerFromKsef) {
         invoice.setKsefId(answerFromKsef.id());
-        return invoice;
     }
 
     private Invoice getInvoiceById(Long invoiceId) {
