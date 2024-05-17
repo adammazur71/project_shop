@@ -61,4 +61,7 @@ public class InvoiceRepository {
                 .getSingleResult();
     }
 
+    public Invoice getInvoiceById(Long invoiceId) {
+        return entityManager.find(Invoice.class, invoiceId);
+    }
 }

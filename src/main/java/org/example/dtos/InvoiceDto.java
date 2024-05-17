@@ -9,7 +9,8 @@ import org.example.entieties.Shipments;
 
 import java.util.Set;
 
-public record InvoiceDto(Long invoiceId, @Min(0) @Max(1) Integer invoiceType, Set<Shipments> shipments,
-                         @Min(0) @Max(1) Integer ksefStatus, @NotNull Customer customer,
+public record InvoiceDto(Long invoiceId, @Min(0) @Max(1) Integer invoiceType, String invoiceNo,
+                         Set<Shipments> shipments, @Min(0) @Max(1) String ksefId,
+                         Double netAmount, Double grossAmount, @NotNull Customer customer,
                          @NotNull Set<InvoiceItem> invoiceItem) {
 }

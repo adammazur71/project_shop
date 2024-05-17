@@ -1,20 +1,27 @@
 package org.example.invoice;
 
+import org.example.client.KsefProxy;
+import org.example.dtos.KsefInvoiceDto;
 import org.example.entieties.Invoice;
 import org.example.entieties.InvoiceItem;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class InvoiceService {
     InvoiceRepository repository;
+    KsefProxy proxy;
+    KsefMapper ksefMapper;
 
     public static final int PURCHASE_INVOICE = 0;
     public static final int SALES_INVOICE = 1;
 
-    public InvoiceService(InvoiceRepository repository) {
+    public InvoiceService(InvoiceRepository repository, KsefProxy proxy, KsefMapper ksefMapper) {
         this.repository = repository;
+        this.proxy = proxy;
+        this.ksefMapper = ksefMapper;
     }
 
     public Invoice importInvoice(Invoice invoice) {
@@ -42,5 +49,16 @@ public class InvoiceService {
         return calculatedGrossAmount;
     }
 
+    public KsefInvoiceDto sendInvoiceToKsef(Long invoiceId) throws ExecutionException, InterruptedException {
+        Invoice invoiceToSend = getInvoiceById(invoiceId);
+        return proxy.sendInvoiceToKsef(ksefMapper.toKsefInvoiceDto(invoiceToSend));
+    }
 
+    public Long setKsefId(Long invoiceId) {
+        return null;
+    }
+
+    private Invoice getInvoiceById(Long invoiceId) {
+        return repository.getInvoiceById(invoiceId);
+    }
 }

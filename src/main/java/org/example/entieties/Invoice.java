@@ -19,12 +19,14 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long invoiceId;
-    @Column(name = "invoice_type", columnDefinition = "INT(1) NOT NULL CHECK(invoice_type BETWEEN 0  AND 1) COMMENT '0 - zakupowa, 1 - sprzedaży'")
+    @Column(name = "invoice_type", columnDefinition = "INT(1) NOT NULL CHECK(invoice_type BETWEEN 0  AND 1) COMMENT '0 - buying, 1 - selling'")
     Integer invoiceType;
+    @Column(name = "invoice_no")
+    String invoiceNo;
     @OneToMany(mappedBy = "invoice")
     Set<Shipments> shipments;
     @Column(name = "ksef_status")
-    Integer ksefStatus;
+    String ksefId;
     @Column(name = "net_amount")
     Double netAmount;
     @Column(name = "gross_amount")
