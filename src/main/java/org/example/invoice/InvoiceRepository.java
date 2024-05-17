@@ -64,4 +64,8 @@ public class InvoiceRepository {
     public Invoice getInvoiceById(Long invoiceId) {
         return entityManager.find(Invoice.class, invoiceId);
     }
+
+    public void updateInvoice(Invoice invoiceToSend) {
+        entityManager.merge(invoiceToSend);
+    }
 }

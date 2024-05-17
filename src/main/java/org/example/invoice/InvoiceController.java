@@ -25,9 +25,14 @@ public class InvoiceController {
         return ResponseEntity.ok(importedInvoice);
     }
 
-    @PostMapping(value = "/{invoiceId}", produces = "application/json")
+    @PostMapping(value = "/ksef/{invoiceId}", produces = "application/json")
     public ResponseEntity<KsefInvoiceDto> sendToKsef(@PathVariable Long invoiceId) throws ExecutionException, InterruptedException {
         KsefInvoiceDto invoiceSentToKsef = service.sendInvoiceToKsef(invoiceId);
         return ResponseEntity.ok(invoiceSentToKsef);
+    }
+    @GetMapping(value = "/ksef/{ksefId}", produces = "application/json")
+    public ResponseEntity<KsefInvoiceDto> getFromKsef(@PathVariable String ksefId) throws ExecutionException, InterruptedException {
+        KsefInvoiceDto invoiceFromKsef = service.getInvoiceFromKsef(ksefId);
+        return ResponseEntity.ok(invoiceFromKsef);
     }
 }

@@ -25,7 +25,7 @@ public class Invoice {
     String invoiceNo;
     @OneToMany(mappedBy = "invoice")
     Set<Shipments> shipments;
-    @Column(name = "ksef_status")
+    @Column(name = "ksef_id")
     String ksefId;
     @Column(name = "net_amount")
     Double netAmount;

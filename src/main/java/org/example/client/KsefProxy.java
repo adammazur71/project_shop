@@ -25,9 +25,9 @@ public class KsefProxy {
                 .get()
                 .getBody();
     }
-    public KsefInvoiceDto getInvoiceFromKsef(Long id) throws ExecutionException, InterruptedException {
+    public KsefInvoiceDto getInvoiceFromKsef(String id) throws ExecutionException, InterruptedException {
         return webClient.get()
-                .uri(url)
+                .uri(url + "/" + id)
                 .retrieve()
                 .toEntity(KsefInvoiceDto.class)
                 .toFuture()

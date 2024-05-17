@@ -5,6 +5,7 @@ import org.example.dtos.KsefInvoiceDto;
 import org.example.entieties.Invoice;
 import org.example.entieties.InvoiceItem;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -49,16 +50,25 @@ public class InvoiceService {
         return calculatedGrossAmount;
     }
 
+    @Transactional
     public KsefInvoiceDto sendInvoiceToKsef(Long invoiceId) throws ExecutionException, InterruptedException {
         Invoice invoiceToSend = getInvoiceById(invoiceId);
-        return proxy.sendInvoiceToKsef(ksefMapper.toKsefInvoiceDto(invoiceToSend));
+        KsefInvoiceDto answerFromKsef = proxy.sendInvoiceToKsef(ksefMapper.toKsefInvoiceDto(invoiceToSend));
+        setKsefId(invoiceToSend, answerFromKsef);
+        repository.updateInvoice(invoiceToSend);
+        return answerFromKsef;
     }
 
-    public Long setKsefId(Long invoiceId) {
-        return null;
+    private Invoice setKsefId(Invoice invoice, KsefInvoiceDto answerFromKsef) {
+        invoice.setKsefId(answerFromKsef.id());
+        return invoice;
     }
 
     private Invoice getInvoiceById(Long invoiceId) {
         return repository.getInvoiceById(invoiceId);
+    }
+
+    public KsefInvoiceDto getInvoiceFromKsef(String ksefId) throws ExecutionException, InterruptedException {
+        return proxy.getInvoiceFromKsef(ksefId);
     }
 }
