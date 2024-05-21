@@ -1,6 +1,7 @@
 package org.example.invoice;
 
 import org.example.client.KsefProxy;
+import org.example.dtos.InvoiceDto;
 import org.example.dtos.KsefInvoiceDto;
 import org.example.entieties.Invoice;
 import org.example.entieties.InvoiceItem;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -20,15 +23,18 @@ public class InvoiceService {
     private final KsefProxy proxy;
     private final KsefMapper ksefMapper;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private final InvoiceMapper invoiceMapper;
 
     public static final int PURCHASE_INVOICE = 0;
     public static final int SALES_INVOICE = 1;
+    public static final int NOT_PAID_INVOICE = 0;
 
-    public InvoiceService(InvoiceRepository repository, KsefProxy proxy, KsefMapper ksefMapper, ApplicationEventPublisher applicationEventPublisher) {
+    public InvoiceService(InvoiceRepository repository, KsefProxy proxy, KsefMapper ksefMapper, ApplicationEventPublisher applicationEventPublisher, InvoiceMapper invoiceMapper) {
         this.repository = repository;
         this.proxy = proxy;
         this.ksefMapper = ksefMapper;
         this.applicationEventPublisher = applicationEventPublisher;
+        this.invoiceMapper = invoiceMapper;
     }
 
     public Invoice importInvoice(Invoice invoice) {
@@ -85,5 +91,14 @@ public class InvoiceService {
 
     public KsefInvoiceDto getInvoiceFromKsef(String ksefId) throws ExecutionException, InterruptedException {
         return proxy.getInvoiceFromKsef(ksefId);
+    }
+
+    public List<InvoiceDto> getUnpaidInvoices() {
+        List<Invoice> unpaidInvoices = repository.getInvoices(NOT_PAID_INVOICE, SALES_INVOICE);
+        List<InvoiceDto> unpaidInvoicesDto = new ArrayList<>();
+        for (Invoice i:unpaidInvoices
+             ) {unpaidInvoicesDto.add(invoiceMapper.toDto(i));
+        }
+        return unpaidInvoicesDto;
     }
 }

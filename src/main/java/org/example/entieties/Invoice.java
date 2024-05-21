@@ -23,6 +23,8 @@ public class Invoice {
     Integer invoiceType;
     @Column(name = "invoice_no")
     String invoiceNo;
+    @Column(name= "is_paid", columnDefinition = "INT(1) NOT NULL CHECK(is_paid BETWEEN 0  AND 1) COMMENT '0 - unpaid, 1 - paid'")
+    Integer isPaid;
     @OneToMany(mappedBy = "invoice")
     Set<Shipments> shipments;
     @Column(name = "ksef_id")

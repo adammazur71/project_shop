@@ -10,6 +10,7 @@ import org.example.exceptions.ValidationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -67,5 +68,12 @@ public class InvoiceRepository {
 
     public void updateInvoice(Invoice invoiceToSend) {
         entityManager.merge(invoiceToSend);
+    }
+
+    public List<Invoice> getInvoices(Integer isPaid, Integer invoiceType) {
+        return (List<Invoice>) entityManager.createNativeQuery("SELECT * FROM invoice WHERE is_paid = :isPaid AND invoice_type = :invoiceType", Invoice.class)
+                .setParameter("isPaid", isPaid)
+                .setParameter("invoiceType", invoiceType)
+                .getResultList();
     }
 }
