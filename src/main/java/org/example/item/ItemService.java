@@ -1,8 +1,8 @@
 package org.example.item;
 
-import org.example.entieties.Item;
-import org.example.entieties.ItemType;
-import org.example.entieties.Stock;
+import org.example.entities.Item;
+import org.example.entities.ItemType;
+import org.example.entities.Stock;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -2,10 +2,10 @@ package org.example.invoice;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.example.entieties.Invoice;
-import org.example.entieties.InvoiceItem;
-import org.example.entieties.Item;
-import org.example.entieties.Stock;
+import org.example.entities.Invoice;
+import org.example.entities.InvoiceItem;
+import org.example.entities.Item;
+import org.example.entities.Stock;
 import org.example.exceptions.ValidationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,19 +18,33 @@ public class InvoiceRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public Invoice importInvoice(Invoice invoice) {
-        Invoice savedInvoice = entityManager.merge(invoice);
-        Set<InvoiceItem> invoiceItems = invoice.getInvoiceItem();
-        for (InvoiceItem invoiceItem : invoiceItems) {
-            saveInvoiceItemAndSetInvoiceItemId(invoiceItem, savedInvoice);
-            saveStock(invoiceItem, invoice);
-            Item item = changeStockQty(invoiceItem);
-            entityManager.persist(item);
-        }
-        savedInvoice.setInvoiceItem(invoiceItems);
-        return savedInvoice;
-    }
+@Transactional
+public Invoice importInvoice(Invoice invoice) {
+    Invoice savedInvoice = saveInvoice(invoice);
+    processInvoiceItems(savedInvoice);
+    return savedInvoice;
+}
+
+private Invoice saveInvoice(Invoice invoice) {
+    return entityManager.merge(invoice);
+}
+
+private void processInvoiceItems(Invoice savedInvoice) {
+    Set<InvoiceItem> invoiceItems = savedInvoice.getInvoiceItem();
+    invoiceItems.forEach(invoiceItem -> processInvoiceItem(invoiceItem, savedInvoice));
+    savedInvoice.setInvoiceItem(invoiceItems);
+}
+
+private void processInvoiceItem(InvoiceItem invoiceItem, Invoice savedInvoice) {
+    saveInvoiceItemAndSetInvoiceItemId(invoiceItem, savedInvoice);
+    saveStock(invoiceItem, savedInvoice);
+    persistItemAfterStockChange(invoiceItem);
+}
+
+private void persistItemAfterStockChange(InvoiceItem invoiceItem) {
+    Item item = changeStockQty(invoiceItem);
+    entityManager.persist(item);
+}
 
     private void saveInvoiceItemAndSetInvoiceItemId(InvoiceItem invoiceItem, Invoice savedInvoice) {
         invoiceItem.setInvoiceId(savedInvoice.getInvoiceId());

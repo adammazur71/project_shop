@@ -18,10 +18,12 @@ public class Scheduler {
         this.emailService = emailService;
     }
 
+    // Cron expression - przeniósłbym do properties. Wtedy możne za pomoca adnotacji @Value przekazać wartość jako String i wykorzystać jako arguemnt metody Schedulera
     @Scheduled(cron = "0 15 20 * * MON-FRI", zone = "Europe/Warsaw")
     private void sendNotificationEmail() {
         List<InvoiceDto> unpaidInvoices = invoiceService.getUnpaidInvoices();
         for (InvoiceDto i : unpaidInvoices) {
+            // A może event DTO?
             String email = i.customer().getEmail();
             String subject = "Unpaid invoice no: " + i.invoiceNo();
             String text = "Please settle the payment for invoice: " + i.invoiceNo() + " in the amount of PLN : " + i.grossAmount();

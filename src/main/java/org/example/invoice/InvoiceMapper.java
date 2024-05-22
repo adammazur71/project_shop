@@ -1,7 +1,7 @@
 package org.example.invoice;
 
 import org.example.dtos.InvoiceDto;
-import org.example.entieties.Invoice;
+import org.example.entities.Invoice;
 import org.springframework.stereotype.Component;
 
 @Component

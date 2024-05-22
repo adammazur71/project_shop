@@ -5,9 +5,10 @@ import org.example.simpleEmail.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
+// TODO: JAVA DOC
 @Component
 public class SentToKsefEventListener implements ApplicationListener<SentToKsefEvent> {
+
     @Autowired
     EmailServiceImpl emailService;
 

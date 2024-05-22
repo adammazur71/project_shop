@@ -3,8 +3,8 @@ package org.example.invoice;
 import org.example.client.KsefProxy;
 import org.example.dtos.InvoiceDto;
 import org.example.dtos.KsefInvoiceDto;
-import org.example.entieties.Invoice;
-import org.example.entieties.InvoiceItem;
+import org.example.entities.Invoice;
+import org.example.entities.InvoiceItem;
 import org.example.events.SentToKsefEvent;
 import org.example.exceptions.ValidationException;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
+// Metody wydzieliłbym do interfejsu, cześc odpowiedzialności przeniósł do Componentów
+// TODO: Javadoc
 public class InvoiceService {
     private final InvoiceRepository repository;
     private final KsefProxy proxy;
@@ -44,6 +47,7 @@ public class InvoiceService {
     }
 
 
+    // A może te dwie metody wydzielić do osobnej klasy? Np. do kompontentu InvoiceCalculator?
     private Double calculateNetAmount(Invoice invoice) {
         Set<InvoiceItem> items = invoice.getInvoiceItem();
         Double calculatedNetAmount = 0.0;
@@ -66,14 +70,20 @@ public class InvoiceService {
     public KsefInvoiceDto sendInvoiceToKsef(Long invoiceId) throws ExecutionException, InterruptedException {
         Invoice invoiceToSend = getInvoiceById(invoiceId);
         validateInvoiceBeforeSend(invoiceToSend);
+        //powinniśmy obsłużyć pewne elementy tej transakacji, np. w przypadku błędu w trakcie wysyłania do KSEF
         KsefInvoiceDto answerFromKsef = proxy.sendInvoiceToKsef(ksefMapper.toKsefInvoiceDto(invoiceToSend));
         setKsefId(invoiceToSend, answerFromKsef);
         repository.updateInvoice(invoiceToSend);
-        SentToKsefEvent sentToKsefEvent = new SentToKsefEvent(answerFromKsef, Clock.systemUTC());
-        applicationEventPublisher.publishEvent(sentToKsefEvent);
+        publishKsefEvent(answerFromKsef);
         return answerFromKsef;
     }
 
+    private void publishKsefEvent(KsefInvoiceDto answerFromKsef) {
+        SentToKsefEvent sentToKsefEvent = new SentToKsefEvent(answerFromKsef, Clock.systemUTC());
+        applicationEventPublisher.publishEvent(sentToKsefEvent);
+    }
+
+    // A moze Component? InvoiceValidator?
     private void validateInvoiceBeforeSend(Invoice invoice) {
         if (invoice.getKsefId() != null)
             throw new ValidationException("Invoice " + invoice.getInvoiceNo() + " has been already sent");
@@ -93,12 +103,10 @@ public class InvoiceService {
         return proxy.getInvoiceFromKsef(ksefId);
     }
 
-    public List<InvoiceDto> getUnpaidInvoices() {
-        List<Invoice> unpaidInvoices = repository.getInvoices(NOT_PAID_INVOICE, SALES_INVOICE);
-        List<InvoiceDto> unpaidInvoicesDto = new ArrayList<>();
-        for (Invoice i:unpaidInvoices
-             ) {unpaidInvoicesDto.add(invoiceMapper.toDto(i));
-        }
-        return unpaidInvoicesDto;
-    }
+public List<InvoiceDto> getUnpaidInvoices() {
+    List<Invoice> unpaidInvoices = repository.getInvoices(NOT_PAID_INVOICE, SALES_INVOICE);
+    return unpaidInvoices.stream()
+                         .map(invoiceMapper::toDto)
+                         .collect(Collectors.toList());
+}
 }

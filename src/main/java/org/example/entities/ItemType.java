@@ -1,4 +1,4 @@
-package org.example.entieties;
+package org.example.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "Item_type")
+// TODO: JAVA DOC
 public class ItemType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

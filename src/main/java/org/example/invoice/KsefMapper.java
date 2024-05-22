@@ -1,11 +1,12 @@
 package org.example.invoice;
 
 import org.example.dtos.KsefInvoiceDto;
-import org.example.entieties.Invoice;
+import org.example.entities.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+// TODO: Javadoc
 public class KsefMapper {
 
     @Autowired

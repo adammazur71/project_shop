@@ -1,11 +1,10 @@
-package org.example.entieties;
+package org.example.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 import java.util.Date;
 @NoArgsConstructor
@@ -14,6 +13,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "Shipments")
+// TODO: JAVA DOC
 public class Shipments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

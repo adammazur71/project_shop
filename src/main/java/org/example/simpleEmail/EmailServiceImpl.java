@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailServiceImpl {
 
+    // A czemu Autowired? Wcześniej było wstrzyknięcie przez konstruktor.
     @Autowired
     private JavaMailSender emailSender;
 

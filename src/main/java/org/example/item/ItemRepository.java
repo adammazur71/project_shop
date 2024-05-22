@@ -1,6 +1,6 @@
 package org.example.item;
 
-import org.example.entieties.Item;
+import org.example.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

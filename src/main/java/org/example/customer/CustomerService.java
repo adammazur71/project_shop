@@ -2,7 +2,7 @@ package org.example.customer;
 
 import lombok.AllArgsConstructor;
 import org.example.dtos.UpdateCustomerDto;
-import org.example.entieties.Customer;
+import org.example.entities.Customer;
 import org.example.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,11 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class CustomerService {
+
+    // TODO: Wydzieliłbym interfejs tych metod, żeby było łatwiej testować.
+    // Wtedy można by było zrobić implementację w stylu CustomerServiceImpl.
+    // Sugerowałbym bym również w Serwisach zwracać DTO, a nie encje. Na przykładzie w CapWSB-Fitness Tracker tam zastosowałem skrót,
+    // mappowanie z Entity-> jest po streonie Controllera - natomiast nie jest to dobra praktyka
     CustomerRepository repository;
 
     public Customer save(Customer customer) {
@@ -20,6 +25,7 @@ public class CustomerService {
 
     public Customer updateAndSaveCustomer(Long id, UpdateCustomerDto customerDto) {
         Customer oldCustomer = getById(id).orElseThrow(() -> new NotFoundException("Id " + id + " does not exist"));
+        // Jest ok, ale nie lepiej z Optionalem? Np.Optional.ofNullable(customerDto.customerName()).ifPresent(oldCustomer::setCustomerName);
         if (customerDto.customerName() != null) oldCustomer.setCustomerName(customerDto.customerName());
         if (customerDto.nip() != null) oldCustomer.setNip(customerDto.nip());
         if (customerDto.street() != null) oldCustomer.setStreet(customerDto.street());

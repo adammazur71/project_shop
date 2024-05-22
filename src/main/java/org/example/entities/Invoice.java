@@ -1,11 +1,10 @@
-package org.example.entieties;
+package org.example.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -15,6 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "invoice")
+// TODO: JAVA DOC
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

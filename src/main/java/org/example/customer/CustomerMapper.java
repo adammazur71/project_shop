@@ -1,7 +1,7 @@
 package org.example.customer;
 
 import org.example.dtos.CustomerDto;
-import org.example.entieties.Customer;
+import org.example.entities.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,7 +1,10 @@
-package org.example.entieties;
+package org.example.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -9,7 +12,9 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "Customers")
+// TODO: JAVA DOC
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Customer_id")

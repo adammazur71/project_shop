@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.dtos.CustomerDto;
 import org.example.dtos.UpdateCustomerDto;
-import org.example.entieties.Customer;
+import org.example.entities.Customer;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    CustomerService service;
-    CustomerMapper mapper;
+
+    private final CustomerService service;
+
+    private final CustomerMapper mapper;
 
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Customer> saveNewCustomer(@RequestBody @Valid CustomerDto customerDto,

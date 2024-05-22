@@ -1,8 +1,7 @@
-package org.example.entieties;
-
-import lombok.*;
+package org.example.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Set;
 
@@ -13,6 +12,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "Item")
+// TODO: JAVA DOC
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
