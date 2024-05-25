@@ -1,7 +1,6 @@
 package org.example.client;
 
 import org.example.dtos.KsefInvoiceDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,8 +11,12 @@ import java.util.concurrent.ExecutionException;
 public class KsefProxy {
 
     // O tutaj też @Autowired, lepiej byłoby wstrzyknąć przez konstruktor. Autowired nie jest rekomendowany.
-    @Autowired
+
     WebClient webClient;
+
+    public KsefProxy(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     @Value("${ksefUrl}")
     private String url;

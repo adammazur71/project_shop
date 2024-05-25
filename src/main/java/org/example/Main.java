@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // Powydzielałbym metody z serwisów do interfejsów, componentów, etc.
 // Zmniejszyłbym odpowiedzialności niektórych serwisów
 // Wszystkie klasy są otwarte. Byc może warto byłoby zastosować zasadę "Open-Closed Principle" i zamknąć klasy, które nie muszą być otwarte.
-// Main.java nie wygląda dobrze ;) A Scheduler nie do końca mówi co robi.
+// Main.java nie wygląda dobrze ;) A EmailScheduler nie do końca mówi co robi.
 // Nazwa pakietu org.example nie jest zbyt opisowa. Może warto byłoby zmienić na coś bardziej adekwatnego?
 // Warto byłoby zastosować jakieś wzorce projektowe
 public class Main {

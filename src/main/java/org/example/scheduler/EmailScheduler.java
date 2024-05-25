@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class Scheduler {
+public class EmailScheduler {
     private final InvoiceService invoiceService;
     private final EmailServiceImpl emailService;
 
-    public Scheduler(InvoiceService invoiceService, EmailServiceImpl emailService) {
+    public EmailScheduler(InvoiceService invoiceService, EmailServiceImpl emailService) {
         this.invoiceService = invoiceService;
         this.emailService = emailService;
     }
 
     // Cron expression - przeniósłbym do properties. Wtedy możne za pomoca adnotacji @Value przekazać wartość jako String i wykorzystać jako arguemnt metody Schedulera
-    @Scheduled(cron = "0 15 20 * * MON-FRI", zone = "Europe/Warsaw")
+    @Scheduled(cron = "${cron}", zone = "Europe/Warsaw")
     private void sendNotificationEmail() {
         List<InvoiceDto> unpaidInvoices = invoiceService.getUnpaidInvoices();
         for (InvoiceDto i : unpaidInvoices) {
