@@ -20,15 +20,17 @@ public class Item {
     @JoinColumn(name = "item_type_id")
     @ManyToOne
     ItemType itemType;
-    @Column(name = "Item_Name")
+    @Column(name = "item_name")
     String itemName;
-    @Column(name = "Purchase_price")
+    @Column(name = "purchase_net_price")
     Double purchaseNetPrice;
-    @Column(name = "Purchase_vat")
+    @Column(name = "vat_stake")
+    Double vatStake;
+    @Column(name = "purchase_gross_price")
     Double purchaseGrossPrice;
-    @Column(name = "Selling_price")
+    @Column(name = "Selling_net_price")
     Double sellingNetPrice;
-    @Column(name = "Selling_vat")
+    @Column(name = "Selling_gross_price")
     Double sellingGrossPrice;
     @JoinColumn(name = "Supplier_id")
     @ManyToOne
