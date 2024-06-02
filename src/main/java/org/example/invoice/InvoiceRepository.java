@@ -25,7 +25,7 @@ public class InvoiceRepository {
         for (InvoiceItem invoiceItem : invoiceItems) {
             saveInvoiceItemAndSetInvoiceItemId(invoiceItem, savedInvoice);
             saveStock(invoiceItem, invoice);
-            Item item = changeStockQty(invoiceItem);
+            Item item = saveNewItemPrice(invoiceItem, invoice.getInvoiceType());
             entityManager.persist(item);
         }
         savedInvoice.setInvoiceItem(invoiceItems);
@@ -40,7 +40,8 @@ public class InvoiceRepository {
 
     private void saveStock(InvoiceItem invoiceItem, Invoice invoice) {
         Stock stock = getStockByItemId(invoiceItem.getItemId());
-        if (invoice.getInvoiceType() == InvoiceService.PURCHASE_INVOICE) stock.setQty(stock.getQty() + invoiceItem.getQtySold());
+        if (invoice.getInvoiceType() == InvoiceService.PURCHASE_INVOICE)
+            stock.setQty(stock.getQty() + invoiceItem.getQtySold());
         else {
             stock.setQty(stock.getQty() - invoiceItem.getQtySold());
             if (stock.getQty() < 0)
@@ -49,10 +50,15 @@ public class InvoiceRepository {
         entityManager.persist(stock);
     }
 
-    private Item changeStockQty(InvoiceItem invoiceItem) {
+    private Item saveNewItemPrice(InvoiceItem invoiceItem, int invoiceType) {
         Item item = entityManager.find(Item.class, invoiceItem.getItemId());
-        item.setPurchaseNetPrice(invoiceItem.getNetValue());
-        item.setPurchaseGrossPrice(invoiceItem.getGrossValue());
+        if (invoiceType == InvoiceService.PURCHASE_INVOICE) {
+            item.setPurchaseNetPrice(invoiceItem.getNetValue());
+            item.setPurchaseGrossPrice(invoiceItem.getGrossValue());
+        } else {
+            item.setSellingNetPrice(invoiceItem.getNetValue());
+            item.setSellingGrossPrice(invoiceItem.getGrossValue());
+        }
         return item;
     }
 

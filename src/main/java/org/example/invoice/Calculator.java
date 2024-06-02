@@ -28,7 +28,7 @@ public class Calculator {
 
     protected Invoice setCalculatedGrossItemsPrice(Invoice invoice) {
         Set<InvoiceItem> items = invoice.getInvoiceItem();
-        items.forEach(this::calculateGrossPurchaseItemPrice);
+        items.forEach(s -> s.setGrossValue(calculateGrossPurchaseItemPrice(s)));
         invoice.setInvoiceItem(items);
         return invoice;
     }
@@ -36,6 +36,6 @@ public class Calculator {
     private Double calculateGrossPurchaseItemPrice(InvoiceItem item) {
         double vatStake = item.getVatStake();
         double netPrice = item.getNetValue();
-        return (double) Math.round(vatStake * netPrice * 10) / 10;
+        return (double) Math.round((netPrice + vatStake * netPrice) * 100) / 100;
     }
 }
