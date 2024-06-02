@@ -3,6 +3,7 @@ package org.shop.scheduler;
 import org.shop.dtos.InvoiceDto;
 import org.shop.invoice.InvoiceService;
 import org.shop.simpleEmail.EmailServiceImpl;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +18,9 @@ public class Scheduler {
         this.invoiceService = invoiceService;
         this.emailService = emailService;
     }
-
+    @Async("async-pool")
     @Scheduled(cron = "0 15 20 * * MON-FRI", zone = "Europe/Warsaw")
-    private void sendNotificationEmail() {
+    protected void sendNotificationEmail() {
         List<InvoiceDto> unpaidInvoices = invoiceService.getUnpaidInvoices();
         for (InvoiceDto i : unpaidInvoices) {
             String email = i.customer().getEmail();

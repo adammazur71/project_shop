@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class KsefMapper {
 
-    @Autowired
     InvoiceMapper invoiceMapper;
+
+    public KsefMapper(InvoiceMapper invoiceMapper) {
+        this.invoiceMapper = invoiceMapper;
+    }
 
     public KsefInvoiceDto toKsefInvoiceDto(Invoice invoice) {
         return new KsefInvoiceDto(null, null, invoice.getInvoiceNo(), invoiceMapper.toDto(invoice));

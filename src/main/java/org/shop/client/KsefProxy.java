@@ -10,10 +10,14 @@ import java.util.concurrent.ExecutionException;
 
 @Component
 public class KsefProxy {
-    @Autowired
+
     WebClient webClient;
     @Value("${ksefUrl}")
     private String url;
+
+    public KsefProxy(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public KsefInvoiceDto sendInvoiceToKsef(KsefInvoiceDto ksefInvoiceDto) throws ExecutionException, InterruptedException {
         return webClient.post()

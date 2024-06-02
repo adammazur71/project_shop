@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SentToKsefEventListener implements ApplicationListener<SentToKsefEvent> {
-    @Autowired
+
     EmailServiceImpl emailService;
+
+    public SentToKsefEventListener(EmailServiceImpl emailService) {
+        this.emailService = emailService;
+    }
 
     @Override
     @Async("async-pool")
