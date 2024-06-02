@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 public class ItemMapper {
     ItemDto toDto(Item item) {
         return new ItemDto(item.getItemId(), item.getItemType(), item.getItemName(), item.getPurchaseNetPrice(),
-                item.getPurchaseGrossPrice(), item.getSellingGrossPrice(), item.getSellingGrossPrice(),
-                item.getCustomer());
+                item.getVatStake(), item.getPurchaseGrossPrice(), item.getSellingGrossPrice(),
+                item.getSellingGrossPrice(), item.getCustomer());
     }
 
     Item toEntity(ItemDto itemDto) {
         return new Item(itemDto.itemId(), itemDto.itemType(), itemDto.itemName(), itemDto.purchaseNetPrice(),
-                itemDto.purchaseGrossPrice(), itemDto.sellingNetPrice(), itemDto.sellingGrossPrice(),
-                itemDto.customer(), null, null);
+                itemDto.vatStake(), itemDto.purchaseGrossPrice(), itemDto.sellingNetPrice(),
+                itemDto.sellingGrossPrice(), itemDto.customer(), null, null);
     }
 }

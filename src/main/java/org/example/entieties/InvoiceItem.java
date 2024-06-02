@@ -23,6 +23,8 @@ public class InvoiceItem {
     Integer qtySold;
     @Column(name = "net_value")
     Double netValue;
+    @Column(name = "vat_stake")
+    Double vatStake;
     @Column(name = "gross_value")
     Double grossValue;
 
