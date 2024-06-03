@@ -3,7 +3,7 @@ package org.shop.invoice;
 import org.shop.client.KsefProxy;
 import org.shop.dtos.InvoiceDto;
 import org.shop.dtos.KsefInvoiceDto;
-import org.shop.entieties.Invoice;
+import org.shop.entities.Invoice;
 import org.shop.events.SentToKsefEvent;
 import org.shop.exceptions.ValidationException;
 import org.springframework.context.ApplicationEventPublisher;

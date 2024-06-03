@@ -1,8 +1,8 @@
 package org.shop.item;
 
-import org.shop.entieties.Item;
-import org.shop.entieties.ItemType;
-import org.shop.entieties.Stock;
+import org.shop.entities.Item;
+import org.shop.entities.ItemType;
+import org.shop.entities.Stock;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.shop.entieties;
+package org.shop.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,12 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Employees")
-public class Employees {
+@Table(name = "Stock")
+public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long employeeId;
-    @Column(name = "Name")
-    String employeeName;
-
+    private Long stockId;
+    @OneToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+    @Column(name = "qty")
+    private Integer qty;
 }

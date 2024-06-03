@@ -1,7 +1,7 @@
 package org.shop.dtos;
 
-import org.shop.entieties.Customer;
-import org.shop.entieties.ItemType;
+import org.shop.entities.Customer;
+import org.shop.entities.ItemType;
 
 public record ItemDto(Long itemId, ItemType itemType, String itemName, Double purchaseNetPrice, Double vatStake,
                       Double purchaseGrossPrice,

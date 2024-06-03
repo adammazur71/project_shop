@@ -1,4 +1,4 @@
-package org.shop.entieties;
+package org.shop.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,12 +11,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Shipment_method")
-public class ShipmentMethod {
+@Table(name = "Employees")
+public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long shipmentMethodId;
-    @Column(name = "name")
-    String name;
+    private Long employeeId;
+    @Column(name = "Name")
+    private String employeeName;
 
 }

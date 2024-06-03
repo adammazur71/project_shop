@@ -2,10 +2,10 @@ package org.shop.invoice;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.shop.entieties.Invoice;
-import org.shop.entieties.InvoiceItem;
-import org.shop.entieties.Item;
-import org.shop.entieties.Stock;
+import org.shop.entities.Invoice;
+import org.shop.entities.InvoiceItem;
+import org.shop.entities.Item;
+import org.shop.entities.Stock;
 import org.shop.exceptions.ValidationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package org.shop.entieties;
+package org.shop.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,19 +14,19 @@ import lombok.Setter;
 public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long invoiceItemId;
+    private Long invoiceItemId;
     @Column(name = "item_id")
-    Long itemId;
+    private Long itemId;
     @Column(name = "invoice_id")
-    Long invoiceId;
+    private Long invoiceId;
     @Column(name = "qty_sold")
-    Integer qtySold;
+    private Integer qtySold;
     @Column(name = "net_value")
-    Double netValue;
+    private Double netValue;
     @Column(name = "vat_stake")
-    Double vatStake;
+    private Double vatStake;
     @Column(name = "gross_value")
-    Double grossValue;
+    private Double grossValue;
 
 
 

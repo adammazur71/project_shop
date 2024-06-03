@@ -3,7 +3,7 @@ package org.shop.invoice;
 import lombok.AllArgsConstructor;
 import org.shop.dtos.InvoiceDto;
 import org.shop.dtos.KsefInvoiceDto;
-import org.shop.entieties.Invoice;
+import org.shop.entities.Invoice;
 import org.shop.exceptions.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

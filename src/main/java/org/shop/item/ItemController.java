@@ -4,8 +4,8 @@ package org.shop.item;
 import lombok.AllArgsConstructor;
 import org.shop.dtos.ItemDto;
 import org.shop.dtos.ItemTypeDto;
-import org.shop.entieties.Item;
-import org.shop.entieties.ItemType;
+import org.shop.entities.Item;
+import org.shop.entities.ItemType;
 import org.shop.exceptions.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +52,4 @@ public class ItemController {
         ItemType newItemType = service.makeNewItemType(itemTypeMapper.toEntity(itemTypeDto));
         return ResponseEntity.ok(newItemType);
     }
-
 }

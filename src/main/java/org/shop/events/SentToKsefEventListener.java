@@ -2,7 +2,6 @@ package org.shop.events;
 
 import org.shop.dtos.KsefInvoiceDto;
 import org.shop.simpleEmail.EmailServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

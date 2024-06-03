@@ -1,7 +1,7 @@
 package org.shop.invoice;
 
-import org.shop.entieties.Invoice;
-import org.shop.entieties.InvoiceItem;
+import org.shop.entities.Invoice;
+import org.shop.entities.InvoiceItem;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

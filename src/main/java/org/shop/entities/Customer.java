@@ -1,4 +1,4 @@
-package org.shop.entieties;
+package org.shop.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,28 +13,28 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Customer_id")
-    Long customerId;
+    private Long customerId;
     @Column(name = "customer_name")
-    String customerName;
+    private String customerName;
     @Column(name = "Nip")
-    String nip;
+    private String nip;
     @Column(name = "Street")
-    String street;
+    private String street;
     @Column(name = "Building_no")
-    String buildingNo;
+    private String buildingNo;
     @Column(name = "Apartment_no")
-    String apartmentNo;
+    private String apartmentNo;
     @Column(name = "Postal")
-    Integer postal;
+    private Integer postal;
     @Column(name = "City")
-    String city;
+    private String city;
     @Column(name = "Country")
-    String country;
+    private String country;
     @Column(name = "Phone_no")
-    String phoneNo;
+    private String phoneNo;
     @Column(name = "e-mail")
-    String email;
+    private String email;
     @Column(name = "Role", columnDefinition = "INT(1) NOT NULL CHECK(role BETWEEN 0  AND 2) COMMENT 'funkcja: 0 - klient, 1 - dostawca, 2 - oba'")
-    Integer role;
+    private Integer role;
 
 }

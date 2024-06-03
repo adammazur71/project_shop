@@ -1,4 +1,4 @@
-package org.shop.entieties;
+package org.shop.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,19 +17,19 @@ import java.util.Date;
 public class Shipments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long shipmentId;
+    private Long shipmentId;
     @ManyToOne
     @JoinColumn(name = "invoice_id")
-    Invoice invoice;
+    private Invoice invoice;
     @ManyToOne
     @JoinColumn(name = "shipment_method_id")
-    ShipmentMethod shipmentMethod;
+    private ShipmentMethod shipmentMethod;
     @Column(name = "Shipment_date")
-    Date shipmentDate;
+    private Date shipmentDate;
     @JoinColumn(name = "Employee_id")
     @ManyToOne
-    Employees employee;
+    private Employees employee;
     @Column(name = "Status")
-    Integer status;
+    private Integer status;
 
 }

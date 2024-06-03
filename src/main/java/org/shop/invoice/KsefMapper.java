@@ -1,8 +1,7 @@
 package org.shop.invoice;
 
 import org.shop.dtos.KsefInvoiceDto;
-import org.shop.entieties.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.shop.entities.Invoice;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,7 +1,6 @@
 package org.shop.client;
 
 import org.shop.dtos.KsefInvoiceDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -29,6 +28,7 @@ public class KsefProxy {
                 .get()
                 .getBody();
     }
+
     public KsefInvoiceDto getInvoiceFromKsef(String id) throws ExecutionException, InterruptedException {
         return webClient.get()
                 .uri(url + "/" + id)

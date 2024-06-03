@@ -2,7 +2,7 @@ package org.shop.customer;
 
 import lombok.AllArgsConstructor;
 import org.shop.dtos.UpdateCustomerDto;
-import org.shop.entieties.Customer;
+import org.shop.entities.Customer;
 import org.shop.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
