@@ -8,6 +8,9 @@ import org.shop.entities.InvoiceItem;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorClassUnitTests {
 
@@ -30,8 +33,15 @@ public class CalculatorClassUnitTests {
                 null, null, null, null, null, invoiceItemsWithExpectedGrossValue);
         //WHEN
         Invoice invoiceWithCalculatedInvoiceItems = calculator.setCalculatedGrossItemsPrice(invoice);
+        Set<Double> setOfCalculatedGrossItemValues = invoiceWithCalculatedInvoiceItems.getInvoiceItems().stream()
+                .map(InvoiceItem::getGrossValue)
+                .collect(Collectors.toSet());
+        Set<Double> setOfExpectedGrossItemValues = expectedInvoice.getInvoiceItems().stream()
+                        .map(InvoiceItem::getGrossValue)
+                                .collect(Collectors.toSet());
         //THEN
-        Assertions.assertThat(invoiceWithCalculatedInvoiceItems)
+        assertThat(setOfCalculatedGrossItemValues).containsExactlyInAnyOrderElementsOf(setOfExpectedGrossItemValues);
+        assertThat(invoiceWithCalculatedInvoiceItems)
                 .usingRecursiveComparison()
                 .isEqualTo(expectedInvoice);
 
