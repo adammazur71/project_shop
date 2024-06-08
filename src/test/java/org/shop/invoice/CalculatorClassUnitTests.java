@@ -33,7 +33,7 @@ public class CalculatorClassUnitTests {
         //WHEN
         Invoice invoiceWithCalculatedInvoiceItems = calculator.setCalculatedGrossItemsPrice(invoice);
         //THEN
-        Assertions.assertThat(invoice)
+        Assertions.assertThat(invoiceWithCalculatedInvoiceItems)
                 .usingRecursiveComparison()
                 .isEqualTo(expectedInvoice);
 
