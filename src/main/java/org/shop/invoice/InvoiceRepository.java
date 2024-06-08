@@ -21,14 +21,14 @@ public class InvoiceRepository {
     @Transactional(rollbackFor = Throwable.class)
     public Invoice importInvoice(Invoice invoice) {
         Invoice savedInvoice = entityManager.merge(invoice);
-        Set<InvoiceItem> invoiceItems = invoice.getInvoiceItem();
+        Set<InvoiceItem> invoiceItems = invoice.getInvoiceItems();
         for (InvoiceItem invoiceItem : invoiceItems) {
             saveInvoiceItemAndSetInvoiceItemId(invoiceItem, savedInvoice);
             saveStock(invoiceItem, invoice);
             Item item = saveNewItemPrice(invoiceItem, invoice.getInvoiceType());
             entityManager.persist(item);
         }
-        savedInvoice.setInvoiceItem(invoiceItems);
+        savedInvoice.setInvoiceItems(invoiceItems);
         return savedInvoice;
     }
 

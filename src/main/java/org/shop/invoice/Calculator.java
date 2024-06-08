@@ -9,7 +9,7 @@ import java.util.Set;
 @Component
 public class Calculator {
     protected Double calculateNetInvoiceAmount(Invoice invoice) {
-        Set<InvoiceItem> items = invoice.getInvoiceItem();
+        Set<InvoiceItem> items = invoice.getInvoiceItems();
         double calculatedNetAmount = 0.0;
         for (InvoiceItem i : items) {
             calculatedNetAmount = calculatedNetAmount + i.getNetValue() * i.getQtySold();
@@ -18,7 +18,7 @@ public class Calculator {
     }
 
     protected Double calculateGrossInvoiceAmount(Invoice invoice) {
-        Set<InvoiceItem> items = invoice.getInvoiceItem();
+        Set<InvoiceItem> items = invoice.getInvoiceItems();
         double calculatedGrossAmount = 0.0;
         for (InvoiceItem i : items) {
             calculatedGrossAmount = calculatedGrossAmount + i.getGrossValue() * i.getQtySold();
@@ -27,9 +27,9 @@ public class Calculator {
     }
 
     protected Invoice setCalculatedGrossItemsPrice(Invoice invoice) {
-        Set<InvoiceItem> items = invoice.getInvoiceItem();
+        Set<InvoiceItem> items = invoice.getInvoiceItems();
         items.forEach(s -> s.setGrossValue(calculateGrossPurchaseItemPrice(s)));
-        invoice.setInvoiceItem(items);
+        invoice.setInvoiceItems(items);
         return invoice;
     }
 

@@ -38,5 +38,5 @@ public class Invoice {
     private Customer customer;
     @OneToMany
     @JoinColumn(name = "invoice_id")
-    private Set<InvoiceItem> invoiceItem;
+    private Set<InvoiceItem> invoiceItems;
 }

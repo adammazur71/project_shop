@@ -14,7 +14,7 @@ public class CalculatorClassUnitTests {
     Calculator calculator = new Calculator();
 
     @Test
-    void shouldCalculateCorrectGrossItemPrice() {
+    void shouldCalculateAndSetCorrectGrossItemPrice() {
         //GIVEN
         Set<InvoiceItem> invoiceItems = new HashSet<>();
         invoiceItems.add(new InvoiceItem(1L, 1L, 1L, 15, 22.29, 0.08, null));
@@ -28,8 +28,6 @@ public class CalculatorClassUnitTests {
         invoiceItemsWithExpectedGrossValue.add(new InvoiceItem(3L, 3L, 1L, 982, 0.91, 0.00, 0.91));
         Invoice expectedInvoice = new Invoice(1L, 1, "112/05/2024", 1,
                 null, null, null, null, null, invoiceItemsWithExpectedGrossValue);
-
-
         //WHEN
         Invoice invoiceWithCalculatedInvoiceItems = calculator.setCalculatedGrossItemsPrice(invoice);
         //THEN
