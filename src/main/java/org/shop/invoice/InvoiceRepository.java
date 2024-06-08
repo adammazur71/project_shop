@@ -18,7 +18,7 @@ public class InvoiceRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+    @Transactional(rollbackFor = Throwable.class)
     public Invoice importInvoice(Invoice invoice) {
         Invoice savedInvoice = entityManager.merge(invoice);
         Set<InvoiceItem> invoiceItems = invoice.getInvoiceItem();

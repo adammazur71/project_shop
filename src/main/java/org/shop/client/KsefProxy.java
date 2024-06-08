@@ -18,21 +18,23 @@ public class KsefProxy {
         this.webClient = webClient;
     }
 
-    public KsefInvoiceDto sendInvoiceToKsef(KsefInvoiceDto ksefInvoiceDto) throws ExecutionException, InterruptedException {
+    public KsefInvoiceDto sendInvoiceToKsef(KsefInvoiceDto ksefInvoiceDto)
+            throws ExecutionException, InterruptedException {
         return webClient.post()
                 .uri(url)
                 .bodyValue(ksefInvoiceDto)
-                .retrieve()
+                .retrieve() //EXCHANGE??
                 .toEntity(KsefInvoiceDto.class)
                 .toFuture()
                 .get()
                 .getBody();
     }
 
-    public KsefInvoiceDto getInvoiceFromKsef(String id) throws ExecutionException, InterruptedException {
+    public KsefInvoiceDto getInvoiceFromKsef(String id)
+            throws ExecutionException, InterruptedException {
         return webClient.get()
                 .uri(url + "/" + id)
-                .retrieve()
+                .retrieve() //EXCHANGE??
                 .toEntity(KsefInvoiceDto.class)
                 .toFuture()
                 .get()
