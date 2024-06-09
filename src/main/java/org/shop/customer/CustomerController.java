@@ -41,7 +41,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedCustomer);
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/search/id/{id}", produces = "application/json")
     public ResponseEntity<Customer> getById(@PathVariable Long id) {
         Customer customerbyId = service.getById(id).orElseThrow(() -> new NotFoundException("Id " + id + " does not exist"));
         return ResponseEntity.ok(customerbyId);
@@ -51,7 +51,7 @@ public class CustomerController {
     public ResponseEntity<List<CustomerDto>> findCustomerByName(@PathVariable String customerName) {
         List<Customer> customerlist = service.findCustomerByName(customerName);
         if (customerlist.isEmpty())
-            throw new NotFoundException("Customer name containing: " + customerName + " is not found");
+            throw new NotFoundException("Customers name containing: " + customerName + " is not found");
         else {
             List<CustomerDto> result = customerlist.stream()
                     .map(CustomerMapper::toDto)
@@ -64,7 +64,7 @@ public class CustomerController {
     public ResponseEntity<List<CustomerDto>> findCustomerByNip(@PathVariable String customerNip) {
         List<Customer> customerlist = service.findCustomerByNip(customerNip);
         if (customerlist.isEmpty())
-            throw new NotFoundException("Customer nip containing: " + customerNip + " is not found");
+            throw new NotFoundException("Customers NIP containing: " + customerNip + " is not found");
         else {
             List<CustomerDto> result = customerlist.stream()
                     .map(CustomerMapper::toDto)

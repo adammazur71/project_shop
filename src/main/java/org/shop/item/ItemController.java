@@ -7,6 +7,7 @@ import org.shop.dtos.ItemTypeDto;
 import org.shop.entities.Item;
 import org.shop.entities.ItemType;
 import org.shop.exceptions.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,12 +45,12 @@ public class ItemController {
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Item> makeNewItem(@RequestBody ItemDto itemDto) {
         Item savedItem = service.saveNewItem(mapper.toEntity(itemDto));
-        return ResponseEntity.ok(savedItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
     }
 
     @PostMapping(value = "/type", produces = "application/json")
     public ResponseEntity<ItemType> makeNewItemType(@RequestBody ItemTypeDto itemTypeDto) {
         ItemType newItemType = service.makeNewItemType(itemTypeMapper.toEntity(itemTypeDto));
-        return ResponseEntity.ok(newItemType);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newItemType);
     }
 }

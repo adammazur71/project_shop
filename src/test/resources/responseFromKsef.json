@@ -1,0 +1,40 @@
+{
+  "id": "ff8081818feaa6c4018ffd21f45e18d0",
+  "createdAt": "2024-06-09T13:13:32.001+00:00",
+  "name": "Invoice 6/05/2024",
+  "data": {
+    "invoiceId": 2,
+    "invoiceType": 1,
+    "invoiceNo": "Invoice 6/05/2024",
+    "isPaid": 0,
+    "shipments": [],
+    "ksefId": null,
+    "netAmount": 305.6,
+    "grossAmount": 375.88,
+    "customer": {
+      "customerId": 1,
+      "customerName": "Karol222",
+      "nip": "123456789",
+      "street": "lebzingerstr",
+      "buildingNo": "36",
+      "apartmentNo": "25a",
+      "postal": 98456,
+      "city": "Berlin",
+      "country": "Niemcy",
+      "phoneNo": "123456789",
+      "email": "123456789",
+      "role": 2
+    },
+    "invoiceItem": [
+      {
+        "invoiceItemId": 2,
+        "itemId": 1,
+        "invoiceId": 2,
+        "qtySold": 2,
+        "netValue": 152.8,
+        "vatStake": 0.23,
+        "grossValue": 187.94
+      }
+    ]
+  }
+}

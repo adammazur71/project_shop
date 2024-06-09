@@ -18,16 +18,16 @@
             </Policies>
             <DefaultRolloverStrategy max="1" />
         </RollingFile>
-        <appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">
+            <JDBC name="DB" tableName = "sys_log">
+                <DataSource jndiName="jdbc:mysql://localhost:54321/shop" />
             <param name="url" value="jdbc:mysql://localhost:54321/shop"/>
             <param name="driver" value="com.mysql.cj.jdbc.Driver"/>
             <param name="user" value="newuser"/>
             <param name="password" value="password"/>
             <param name="sql" value="INSERT INTO sys_log VALUES('%x','%d','%C','%p','%m')"/>
-
-            <layout class="org.apache.log4j.PatternLayout">
+            <layout class="org.apache.log4j2.PatternLayout">
             </layout>
-        </appender>
+        </JDBC>
     </Appenders>
 
     <Loggers>
@@ -39,6 +39,7 @@
         <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="appLog" />
+            <AppenderRef ref="DB" />
         </Root>
     </Loggers>
 </Configuration>
