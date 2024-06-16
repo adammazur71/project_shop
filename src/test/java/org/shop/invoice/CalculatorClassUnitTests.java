@@ -16,7 +16,6 @@ public class CalculatorClassUnitTests {
     @Test
     void shouldCalculateAndSetCorrectGrossItemPrice() {
         //GIVEN
-        //GIVEN
         Set<InvoiceItem> invoiceItems = Set.of(
                 new InvoiceItem(1L, 1L, 1L, 15, 22.29, 0.08, null),
                 new InvoiceItem(2L, 2L, 1L, 38, 36.11, 0.23, null),

@@ -3,6 +3,7 @@ package org.shop.item;
 import org.shop.entities.Item;
 import org.shop.entities.ItemType;
 import org.shop.entities.Stock;
+import org.shop.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,12 +34,20 @@ public class ItemService {
 
     public Item saveNewItem(Item item) {
         Item savedItem = itemRepository.save(item);
-        stockRepository.save(new Stock(null, savedItem, 0));
-        savedItem.setItemType(item.getItemType());
+        Stock newStock = stockRepository.save(new Stock(null, savedItem, 0));
+        savedItem.setItemType(getItemType(item.getItemType().getItemTypeId()));
+        savedItem.setStock(newStock);
         return savedItem;
     }
 
     public ItemType makeNewItemType(ItemType itemType) {
         return itemTypeRepository.save(itemType);
+    }
+
+
+    private ItemType getItemType(Long itemId) {
+        return itemTypeRepository.findById(itemId)
+                .orElseThrow(() -> new NotFoundException("Item Type Id = " + itemId + " Not Found"));
+
     }
 }

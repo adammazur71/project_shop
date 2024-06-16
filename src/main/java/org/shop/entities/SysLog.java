@@ -20,10 +20,12 @@ public class SysLog {
     private Long id;
     @Column(name = "log_date")
     private Date date;
-    @Column(name = "logger")
+    @Column(name = "log_class")
     private String logger;
     @Column(name = "log_level")
     private String logLevel;
     @Column(name = "log_message")
     private String logMessage;
+    @Column(name = "log_custom")
+    private String logCustom;
 }

@@ -7,39 +7,43 @@
 
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
         <RollingFile name="appLog"
                      fileName="${APP_LOG_ROOT}/log4j2.log"
                      filePattern="${APP_LOG_ROOT}/SpringBoot2App/application-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="19500KB" />
+                <SizeBasedTriggeringPolicy size="19500KB"/>
             </Policies>
-            <DefaultRolloverStrategy max="1" />
+            <DefaultRolloverStrategy max="1"/>
         </RollingFile>
-            <JDBC name="DB" tableName = "sys_log">
-                <DataSource jndiName="jdbc:mysql://localhost:54321/shop" />
-            <param name="url" value="jdbc:mysql://localhost:54321/shop"/>
-            <param name="driver" value="com.mysql.cj.jdbc.Driver"/>
-            <param name="user" value="newuser"/>
-            <param name="password" value="password"/>
-            <param name="sql" value="INSERT INTO sys_log VALUES('%x','%d','%C','%p','%m')"/>
-            <layout class="org.apache.log4j2.PatternLayout">
-            </layout>
+        <JDBC name="DB" tableName="sys_log">
+            <ConnectionFactory
+                    class="org.shop.log4j2.ConnectionFactory"
+                    method="getDatabaseConnection"/>
+<!--            <DriverManager connectionString = "jdbc:mysql://localhost:54321/shop"-->
+<!--                           driverClassName = "com.mysql.cj.jdbc.Driver"-->
+<!--                           userName = "newuser"-->
+<!--                           password = "password"/>-->
+            <Column name="log_date" isEventTimestamp="true"/>
+            <Column name="log_class" pattern="%logger"/>
+            <Column name="log_level" pattern="%level"/>
+            <Column name="log_msg" pattern="%m"/>
+            <Column name="log_custom" pattern="%K{custom_msg}"/>
         </JDBC>
     </Appenders>
 
     <Loggers>
         <Logger name="log4j2Logger" additivity="false">
-            <AppenderRef ref="appLog" />
-            <AppenderRef ref="Console" />
+            <AppenderRef ref="appLog"/>
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="DB"/>
         </Logger>
         <Root level="info">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="appLog" />
-            <AppenderRef ref="DB" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="appLog"/>
+            <AppenderRef ref="DB"/>
         </Root>
     </Loggers>
 </Configuration>

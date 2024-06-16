@@ -43,9 +43,9 @@ public class ItemController {
     }
 
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<Item> makeNewItem(@RequestBody ItemDto itemDto) {
+    public ResponseEntity<ItemDto> makeNewItem(@RequestBody ItemDto itemDto) {
         Item savedItem = service.saveNewItem(mapper.toEntity(itemDto));
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDto(savedItem));
     }
 
     @PostMapping(value = "/type", produces = "application/json")
