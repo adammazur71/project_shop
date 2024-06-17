@@ -41,8 +41,8 @@ public class InvoiceService {
 
     public Invoice importInvoice(Invoice invoice) {
         Invoice invoiceToSave = calculator.setCalculatedGrossItemsPrice(invoice);
-        invoice.setNetAmount(calculator.calculateNetInvoiceAmount(invoiceToSave));
-        invoice.setGrossAmount(calculator.calculateGrossInvoiceAmount(invoiceToSave));
+        invoiceToSave.setNetAmount(calculator.calculateNetInvoiceAmount(invoiceToSave));
+        invoiceToSave.setGrossAmount(calculator.calculateGrossInvoiceAmount(invoiceToSave));
         return repository.importInvoice(invoiceToSave);
     }
 

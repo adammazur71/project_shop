@@ -12,7 +12,7 @@ public class Calculator {
         Set<InvoiceItem> items = invoice.getInvoiceItems();
         double calculatedNetAmount = 0.0;
         for (InvoiceItem i : items) {
-            calculatedNetAmount = calculatedNetAmount + i.getNetValue() * i.getQtySold();
+            calculatedNetAmount = Math.round((calculatedNetAmount + i.getNetValue() * i.getQtySold())*100)/100.0;
         }
         return calculatedNetAmount;
     }
@@ -21,7 +21,7 @@ public class Calculator {
         Set<InvoiceItem> items = invoice.getInvoiceItems();
         double calculatedGrossAmount = 0.0;
         for (InvoiceItem i : items) {
-            calculatedGrossAmount = calculatedGrossAmount + i.getGrossValue() * i.getQtySold();
+            calculatedGrossAmount = Math.round((calculatedGrossAmount + i.getGrossValue() * i.getQtySold())*100)/100.0;
         }
         return calculatedGrossAmount;
     }
@@ -36,6 +36,6 @@ public class Calculator {
     private Double calculateGrossPurchaseItemPrice(InvoiceItem item) {
         double vatStake = item.getVatStake();
         double netPrice = item.getNetValue();
-        return (double) Math.round((netPrice + vatStake * netPrice) * 100) / 100;
+        return (double) Math.round((netPrice + vatStake * netPrice) * 100) / 100.0;
     }
 }

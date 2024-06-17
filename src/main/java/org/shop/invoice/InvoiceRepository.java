@@ -15,8 +15,10 @@ import java.util.Set;
 
 @Repository
 public class InvoiceRepository {
+
     @PersistenceContext
     private EntityManager entityManager;
+
 
     @Transactional(rollbackFor = Throwable.class)
     public Invoice importInvoice(Invoice invoice) {
@@ -29,6 +31,7 @@ public class InvoiceRepository {
             entityManager.persist(item);
         }
         savedInvoice.setInvoiceItems(invoiceItems);
+        saveNewSupplier(savedInvoice);
         return savedInvoice;
     }
 
@@ -62,6 +65,10 @@ public class InvoiceRepository {
         return item;
     }
 
+    private Item getItemById(Long id) {
+        return entityManager.find(Item.class, id);
+    }
+
     private Stock getStockByItemId(Long itemId) {
         return (Stock) entityManager.createNativeQuery("SELECT * FROM stock WHERE item_id = :itemId", Stock.class)
                 .setParameter("itemId", itemId)
@@ -81,5 +88,16 @@ public class InvoiceRepository {
                 .setParameter("isPaid", isPaid)
                 .setParameter("invoiceType", invoiceType)
                 .getResultList();
+    }
+
+    private void saveNewSupplier(Invoice invoice) {
+        if (invoice.getInvoiceType() == 0) {
+            Set<InvoiceItem> invoiceItems = invoice.getInvoiceItems();
+            for (InvoiceItem invoiceItem : invoiceItems) {
+                Item itemToUpdate = getItemById(invoiceItem.getItemId());
+                itemToUpdate.setCustomer(invoice.getCustomer());
+                entityManager.merge(itemToUpdate);
+            }
+        }
     }
 }
